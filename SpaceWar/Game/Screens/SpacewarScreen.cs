@@ -28,8 +28,7 @@ namespace Spacewar
         protected Particles particles;
         protected SceneItem backdrop;
 
-        public SpacewarScreen(Game game)
-            : base(game)
+        public SpacewarScreen()
         {
         }
 

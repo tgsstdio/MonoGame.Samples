@@ -22,8 +22,7 @@ namespace Spacewar
         /// <summary>
         /// Creates a new SpacewarScreen
         /// </summary>
-        public RetroScreen(Game game)
-            : base(game)
+        public RetroScreen()
         {
             //Retro
             backdrop = new SceneItem(game, new RetroStarfield(game));

@@ -276,8 +276,7 @@ namespace Spacewar
 
         #endregion
 
-        public EvolvedShape(Game game, EvolvedShapes shape, PlayerIndex player, int shipNumber, int skinNumber, LightingType scene)
-            : base(game)
+        public EvolvedShape(EvolvedShapes shape, PlayerIndex player, int shipNumber, int skinNumber, LightingType scene)
         {
             Debug.Assert(shape == EvolvedShapes.Ship, "Constructor should only be called with Ship");
             this.shape = shape;
@@ -288,8 +287,7 @@ namespace Spacewar
             CreateShip();
         }
 
-        public EvolvedShape(Game game, EvolvedShapes shape, PlayerIndex player, int shapeNumber, LightingType scene)
-            : base(game)
+        public EvolvedShape(EvolvedShapes shape, PlayerIndex player, int shapeNumber, LightingType scene)
         {
             Debug.Assert(shape == EvolvedShapes.Weapon, "Constructor should only be called with Weapon");
             this.player = player;
@@ -299,8 +297,7 @@ namespace Spacewar
             CreateShape();
         }
 
-        public EvolvedShape(Game game, EvolvedShapes shape, int shapeNumber, LightingType scene)
-            : base(game)
+        public EvolvedShape(EvolvedShapes shape, int shapeNumber, LightingType scene)
         {
             this.shape = shape;
             this.shapeNumber = shapeNumber;

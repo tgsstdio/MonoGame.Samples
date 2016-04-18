@@ -38,15 +38,15 @@ namespace Spacewar
 
         protected SpriteBatch batch = null;
 
-        protected Game game = null;
+      //  protected Game game = null;
 
-        public Game GameInstance
-        {
-            get
-            {
-                return game;
-            }
-        }
+//        public Game GameInstance
+//        {
+//            get
+//            {
+//                return game;
+//            }
+//        }
 
         public SpriteBatch SpriteBatch
         {
@@ -58,12 +58,12 @@ namespace Spacewar
 
         public Screen(Game game)
         {
-            this.game = game;
-            this.scene = new SceneItem(game);
+           // this.game = game;
+            this.scene = new SceneItem();
 
             if (game != null)
             {
-                IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)game.Services.GetService(typeof(IGraphicsDeviceService));
+               // IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)game.Services.GetService(typeof(IGraphicsDeviceService));
                 batch = new SpriteBatch(graphicsService.GraphicsDevice);
             }
         }

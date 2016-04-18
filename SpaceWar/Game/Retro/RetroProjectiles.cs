@@ -32,8 +32,7 @@ namespace Spacewar
         private const int maxProjectileCount = maxTriangleCount * 3;
         VertexPositionColor[] data;
 
-        public RetroProjectiles(Game game)
-            : base(game)
+        public RetroProjectiles()
         {
             Create();
         }

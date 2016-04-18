@@ -50,8 +50,8 @@ namespace Spacewar
         /// <param name="startColor">Start Color including alpha</param>
         /// <param name="endColor">End Color including alpha</param>
         /// <param name="lifetime">How long in seconds before it fades and disappears. This time will transition through the start/end color cycle</param>
-        public Particle(Game game, Vector2 position, Vector2 velocity, Vector4 startColor, Vector4 endColor, TimeSpan lifetime)
-            : base(game, new Vector3(position, 0.0f))
+        public Particle(Vector2 position, Vector2 velocity, Vector4 startColor, Vector4 endColor, TimeSpan lifetime)
+            : base(new Vector3(position, 0.0f))
         {
             Velocity = new Vector3(velocity, 0.0f);
             this.startColor = startColor;

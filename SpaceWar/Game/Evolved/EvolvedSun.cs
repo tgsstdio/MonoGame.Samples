@@ -37,8 +37,7 @@ namespace Spacewar
         private int currentFrame;
         private double currentTime;
 
-        public EvolvedSun(Game game)
-            : base(game)
+        public EvolvedSun()
         {
         }
 
@@ -86,8 +85,8 @@ namespace Spacewar
 
         public override void Render()
         {
-            IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
-            GraphicsDevice device = graphicsService.GraphicsDevice;
+           // IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
+           // GraphicsDevice device = graphicsService.GraphicsDevice;
 
             base.Render();
 

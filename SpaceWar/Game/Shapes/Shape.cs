@@ -32,7 +32,7 @@ namespace Spacewar
         protected Matrix world;
         protected Vector3 position;
 
-        private Game game = null;
+        //private Game game = null;
 
         #region Properties
         public Matrix World
@@ -71,9 +71,9 @@ namespace Spacewar
         /// <summary>
         /// Creates a new shape. Calls the virtual Create method to generate any vertex buffers etc
         /// </summary>
-        public Shape(Game game)
+        public Shape()
         {
-            this.game = game;
+           // this.game = game;
             Create();
         }
 

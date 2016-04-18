@@ -35,11 +35,11 @@ namespace Spacewar
         // Current per-update values.
         private Vector2[] _CurrentMoveAmount = new Vector2[(int)Sticks.Count];
 
-        public void Initialise(Game game)
+        public void Initialise()
         {
             Touches = TouchPanel.GetState();
 
-            IGraphicsDeviceService device = (IGraphicsDeviceService)game.Services.GetService(typeof(IGraphicsDeviceService));
+        //    IGraphicsDeviceService device = (IGraphicsDeviceService)game.Services.GetService(typeof(IGraphicsDeviceService));
             _Viewport = device.GraphicsDevice.Viewport;
 
             // Get the touch control locations.

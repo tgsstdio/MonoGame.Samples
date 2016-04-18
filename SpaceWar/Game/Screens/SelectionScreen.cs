@@ -42,8 +42,7 @@ namespace Spacewar
         /// <summary>
         /// Creates a new selection screen. Plays the music and initializes the models
         /// </summary>
-        public SelectionScreen(Game game)
-            : base(game)
+        public SelectionScreen()
         {
             mainTexture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + selectionTexture);
 

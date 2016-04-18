@@ -62,7 +62,7 @@ namespace Spacewar
         /// <summary>
         /// Update the state so presses can be detected - this should be called once per frame
         /// </summary>
-        public static void Update(Game game)
+        public static void Update()
         {
             keyState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
             keyboard.Update(game, keyState);

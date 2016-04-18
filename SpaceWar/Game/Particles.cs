@@ -31,8 +31,7 @@ namespace Spacewar
 
         private static SpriteBatch batch;
 
-        public Particles(Game game)
-            : base(game)
+        public Particles()
         {
             if (game != null)
             {

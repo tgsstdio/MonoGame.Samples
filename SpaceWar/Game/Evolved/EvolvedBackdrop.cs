@@ -45,8 +45,7 @@ namespace Spacewar
         private ITexture2D layer2;
         private ITexture2D layer3;
 
-        public EvolvedBackdrop(Game game)
-            : base(game)
+        public EvolvedBackdrop()
         {
             layer1Offset = Vector4.Zero;
             layer2Offset = Vector4.Zero;

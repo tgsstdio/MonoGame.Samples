@@ -82,7 +82,7 @@ namespace Spacewar
         /// </summary>
         protected Vector3 center;
 
-        private Game game;
+       // private Game game;
 
         #region Properties
         public bool Delete
@@ -220,9 +220,9 @@ namespace Spacewar
         /// <summary>
         /// Default constructor, does nothing special
         /// </summary>
-        public SceneItem(Game game)
+        public SceneItem()
         {
-            this.game = game;
+       //     this.game = game;
         }
 
         /// <summary>
@@ -230,21 +230,21 @@ namespace Spacewar
         /// </summary>
         /// <param name="shape">The shape to be rendered for this item</param>
         /// <param name="initialPosition">The initial position of the item</param>
-        public SceneItem(Game game, Shape shape, Vector3 initialPosition)
+        public SceneItem(Shape shape, Vector3 initialPosition)
         {
             this.shape = shape;
             this.position = initialPosition;
-            this.game = game;
+          //  this.game = game;
         }
 
         /// <summary>
         /// Creates a SceneItem with a shape to be rendered 
         /// </summary>
         /// <param name="shape">The shape to be rendered for this item</param>
-        public SceneItem(Game game, Shape shape)
+        public SceneItem(Shape shape)
         {
             this.shape = shape;
-            this.game = game;
+          //  this.game = game;
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace Spacewar
         public SceneItem(Game game, Vector3 initialPosition)
         {
             this.position = initialPosition;
-            this.game = game;
+           // this.game = game;
         }
 
         /// <summary>

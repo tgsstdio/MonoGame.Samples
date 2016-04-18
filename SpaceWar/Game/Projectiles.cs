@@ -24,8 +24,7 @@ namespace Spacewar
     /// </summary>
     public class Projectiles : SceneItem
     {
-        public Projectiles(Game game)
-            : base(game)
+        public Projectiles()
         {
             Projectile.ProjectileCount[0] = 0;
             Projectile.ProjectileCount[1] = 0;

@@ -23,8 +23,7 @@ namespace Spacewar
         private Effect effect;
         private EffectParameter worldViewProjectionParam;
 
-        public VectorShape(Game game)
-            : base(game)
+        public VectorShape()
         {
         }
 

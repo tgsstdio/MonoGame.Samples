@@ -151,8 +151,8 @@ namespace Spacewar
 
         #endregion
 
-        public Ship(Game game, PlayerIndex player, ShipClass shipNumber, int shipSkin, Vector3 initialPosition, Projectiles bullets, Particles particles)
-            : base(game, new EvolvedShape(game, EvolvedShapes.Ship, player, (int)shipNumber, shipSkin, LightingType.InGame), initialPosition)
+        public Ship(PlayerIndex player, ShipClass shipNumber, int shipSkin, Vector3 initialPosition, Projectiles bullets, Particles particles)
+            : base(new EvolvedShape(EvolvedShapes.Ship, player, (int)shipNumber, shipSkin, LightingType.InGame), initialPosition)
         {
             this.player = player;
             this.bullets = bullets;
@@ -174,8 +174,8 @@ namespace Spacewar
                 extendedExtent = new Vector3[2];
         }
 
-        public Ship(Game game, PlayerIndex player, Vector3 initialPosition, Projectiles bullets)
-            : base(game, new RetroShip(game), initialPosition)
+        public Ship(PlayerIndex player, Vector3 initialPosition, Projectiles bullets)
+            : base(new RetroShip(), initialPosition)
         {
             this.player = player;
             this.bullets = bullets;

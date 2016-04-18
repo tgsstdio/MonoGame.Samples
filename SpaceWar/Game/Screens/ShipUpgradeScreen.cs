@@ -69,8 +69,7 @@ namespace Spacewar
         /// <summary>
         /// Creates the ShipUpgradeScreen
         /// </summary>
-        public ShipUpgradeScreen(Game game)
-            : base(game)
+        public ShipUpgradeScreen()
         {
             mainTexture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + upgradeTexture);
 

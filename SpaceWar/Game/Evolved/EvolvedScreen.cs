@@ -50,8 +50,7 @@ namespace Spacewar
         /// <summary>
         /// Creates a new SpacewarScreen
         /// </summary>
-        public EvolvedScreen(Game game)
-            : base(game)
+        public EvolvedScreen()
         {
             backdrop = new SceneItem(game, new EvolvedBackdrop(game));
             const float factor = 46;

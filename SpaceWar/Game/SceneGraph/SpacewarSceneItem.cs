@@ -25,8 +25,7 @@ namespace Spacewar
         /// <summary>
         /// Default Constructor - does nothing special
         /// </summary>
-        public SpacewarSceneItem(Game game)
-            : base(game)
+        public SpacewarSceneItem()
         {
         }
 
@@ -35,8 +34,8 @@ namespace Spacewar
         /// </summary>
         /// <param name="shape">A shape that represents the item</param>
         /// <param name="initialPosition">The world space position</param>
-        public SpacewarSceneItem(Game game, Shape shape, Vector3 initialPosition)
-            : base(game, shape, initialPosition)
+        public SpacewarSceneItem(Shape shape, Vector3 initialPosition)
+            : base(shape, initialPosition)
         {
         }
 

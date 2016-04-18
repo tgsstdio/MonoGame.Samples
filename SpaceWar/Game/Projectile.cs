@@ -71,8 +71,7 @@ namespace Spacewar
         /// <param name="velocity">The start velocity</param>
         /// <param name="angle">The direction its facing</param>
         /// <param name="time">The time the projectile was fired</param>
-        public Projectile(Game game, PlayerIndex player, Vector3 position, Vector3 velocity, float angle, TimeSpan time, Particles particles)
-            : base(game)
+        public Projectile(PlayerIndex player, Vector3 position, Vector3 velocity, float angle, TimeSpan time, Particles particles)
         {
             this.player = player;
             this.velocity = velocity;

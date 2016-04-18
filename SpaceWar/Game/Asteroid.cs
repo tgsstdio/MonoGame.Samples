@@ -1,4 +1,4 @@
-#region File Description
+F#region File Description
 //-----------------------------------------------------------------------------
 // Asteroid.cs
 //
@@ -59,8 +59,8 @@ namespace Spacewar
         }
         #endregion
 
-        public Asteroid(Game game, AsteroidType asteroidType, Vector3 position)
-            : base(game, new BasicEffectShape(game, BasicEffectShapes.Asteroid, (int)asteroidType, LightingType.InGame), position)
+        public Asteroid(AsteroidType asteroidType, Vector3 position)
+            : base(new BasicEffectShape(BasicEffectShapes.Asteroid, (int)asteroidType, LightingType.InGame), position)
         {
             //Random spin increments on all 3 axis
             rollIncrement = (float)random.NextDouble() - .5f;

@@ -35,8 +35,8 @@ namespace Spacewar
         /// <summary>
         /// Creates a new titlescreen
         /// </summary>
-        public TitleScreen(Game game)
-            : base(game, @"textures\spacewar_title_FINAL", TimeSpan.Zero, GameState.ShipSelection)
+        public TitleScreen()
+            : base(@"textures\spacewar_title_FINAL", TimeSpan.Zero, GameState.ShipSelection)
         {
             infoTexture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"textures\info_screen");
             buttonTexture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"textures\title_button_overlay");

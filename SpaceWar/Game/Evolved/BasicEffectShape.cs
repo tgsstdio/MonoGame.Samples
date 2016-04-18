@@ -260,8 +260,7 @@ namespace Spacewar
 
         #endregion
 
-        public BasicEffectShape(Game game, BasicEffectShapes shape, PlayerIndex player, int shipNumber, int skinNumber, LightingType scene)
-            : base(game)
+        public BasicEffectShape(BasicEffectShapes shape, PlayerIndex player, int shipNumber, int skinNumber, LightingType scene)
         {
             Debug.Assert(shape == BasicEffectShapes.Ship, "Constructor should only be called with Ship");
             this.shape = shape;
@@ -272,8 +271,7 @@ namespace Spacewar
             CreateShip();
         }
 
-        public BasicEffectShape(Game game, BasicEffectShapes shape, PlayerIndex player, int shapeNumber, LightingType scene)
-            : base(game)
+        public BasicEffectShape(BasicEffectShapes shape, PlayerIndex player, int shapeNumber, LightingType scene)
         {
             Debug.Assert(shape == BasicEffectShapes.Weapon, "Constructor should only be called with Weapon");
             this.player = player;
@@ -283,8 +281,7 @@ namespace Spacewar
             CreateShape();
         }
 
-        public BasicEffectShape(Game game, BasicEffectShapes shape, int shapeNumber, LightingType scene)
-            : base(game)
+        public BasicEffectShape(BasicEffectShapes shape, int shapeNumber, LightingType scene)
         {
             this.shape = shape;
             this.shapeNumber = shapeNumber;

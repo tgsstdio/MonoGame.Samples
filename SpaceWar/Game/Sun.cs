@@ -26,8 +26,8 @@ namespace Spacewar
         /// </summary>
         /// <param name="shape">Which shape to use to draw this</param>
         /// <param name="position">Where to draw it on the screen</param>
-        public Sun(Game game, Shape shape, Vector3 position)
-            : base(game, shape, position)
+        public Sun(Shape shape, Vector3 position)
+            : base(shape, position)
         {
             if ((shape == null) || (shape is EvolvedSun))
             {

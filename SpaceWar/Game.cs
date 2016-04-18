@@ -40,14 +40,14 @@ namespace Spacewar
         private int preferredWindowWidth = 1280;
         private int preferredWindowHeight = 720;
 
-        private static ContentManager contentManager;
+        private IContentManager contentManager;
 
         /// <summary>
         /// The game settings from settings.xml
         /// </summary>
-        private static Settings settings = new Settings();
+        private Settings settings = new Settings();
 
-        private static Camera camera;
+        private Camera camera;
 
         /// <summary>
         /// Information about the players such as score, health etc
@@ -62,20 +62,20 @@ namespace Spacewar
         /// <summary>
         /// Which game board are we playing on
         /// </summary>
-        private static int gameLevel;
+        private int gameLevel;
 
         /// <summary>
         /// Stores game paused state
         /// </summary>
         private bool paused;
 
-        private GraphicsDeviceManager graphics;
+        private IGraphicsDeviceManager graphics;
 
         private bool enableDrawScaling;
         private RenderTarget2D drawBuffer;
         private SpriteBatch spriteBatch;
 
-        private static Screen currentScreen;
+        private Screen currentScreen;
 
         private bool justWentFullScreen;
 

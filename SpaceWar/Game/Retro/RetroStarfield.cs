@@ -28,8 +28,7 @@ namespace Spacewar
         private Effect effect;
         private EffectParameter worldViewProjectionParam;
 
-        public RetroStarfield(Game game)
-            : base(game)
+        public RetroStarfield()
         {
         }
 

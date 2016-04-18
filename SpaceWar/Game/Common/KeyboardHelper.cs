@@ -12,7 +12,7 @@ namespace Spacewar
         KeyboardState previousKeyState;
         public KeyboardState currentKeyState {get;private set;}
 
-        public void Update(Game game, KeyboardState keyState)
+        public void Update(KeyboardState keyState)
         {
             previousKeyState = currentKeyState;
             currentKeyState = keyState;

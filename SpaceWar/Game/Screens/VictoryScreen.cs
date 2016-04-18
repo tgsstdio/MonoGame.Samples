@@ -33,8 +33,8 @@ namespace Spacewar
         /// <summary>
         /// Makes a new splash screen with the right texture, no timeout and will move to the logo screen
         /// </summary>
-        public VictoryScreen(Game game)
-            : base(game, victoryScreen, TimeSpan.Zero, GameState.LogoSplash)
+        public VictoryScreen()
+            : base(victoryScreen, TimeSpan.Zero, GameState.LogoSplash)
         {
             mainTexture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + victoryScreen);
             Sound.PlayCue(Sounds.TitleMusic);

@@ -20,8 +20,7 @@ namespace Spacewar
     /// </summary>
     public class RetroShip : VectorShape
     {
-        public RetroShip(Game game)
-            : base(game)
+        public RetroShip()
         {
         }
 
