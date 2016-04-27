@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 #region Using Statements
@@ -26,8 +29,8 @@ namespace Spacewar
     {
         private bool showInfo;
         private bool playRetro;
-        Texture2D infoTexture;
-        Texture2D buttonTexture;
+        ITexture2D infoTexture;
+        ITexture2D buttonTexture;
 
         /// <summary>
         /// Creates a new titlescreen
@@ -35,8 +38,8 @@ namespace Spacewar
         public TitleScreen(Game game)
             : base(game, @"textures\spacewar_title_FINAL", TimeSpan.Zero, GameState.ShipSelection)
         {
-            infoTexture = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + @"textures\info_screen");
-            buttonTexture = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + @"textures\title_button_overlay");
+            infoTexture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"textures\info_screen");
+            buttonTexture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"textures\title_button_overlay");
         }
 
         /// <summary>

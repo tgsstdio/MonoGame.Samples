@@ -48,7 +48,7 @@ namespace Spacewar
 
         public override void Render()
         {
-            Texture2D background = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + @"textures\retro_backdrop");
+            ITexture2D background = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"textures\retro_backdrop");
             IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
             GraphicsDevice device = graphicsService.GraphicsDevice;
 

@@ -212,7 +212,7 @@ namespace Spacewar
 
                     //Draw the correct character at the correct position
                     batch.Draw(
-                        SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + fontInfo.Filename),
+                        SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + fontInfo.Filename),
                         new Vector2(xPosition, (float)y),
                         new Rectangle(character * fontInfo.CharacterSpacing + fontInfo.StartOffset, 0, fontInfo.CharacterWidth, fontInfo.CharacterHeight),
                         new Color(color));

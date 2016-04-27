@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 #region Using Statements
@@ -25,7 +28,7 @@ namespace Spacewar
     /// </summary>
     public class FullScreenSplash : Screen
     {
-        private Texture2D screenTexture;
+        private ITexture2D screenTexture;
         private double timeout;
         private double endTime = -1;
         private GameState nextState = GameState.None;
@@ -56,7 +59,7 @@ namespace Spacewar
 
         private void setTexture(string textureName)
         {
-            this.screenTexture = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + textureName);
+            this.screenTexture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + textureName);
         }
 
         /// <summary>

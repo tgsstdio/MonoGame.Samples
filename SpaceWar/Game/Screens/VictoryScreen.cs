@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 #region Using Statements
@@ -23,7 +26,7 @@ namespace Spacewar
     public class VictoryScreen : FullScreenSplash
     {
         private static string victoryScreen = @"textures\victory";
-        Texture2D mainTexture;
+        ITexture2D mainTexture;
         private int winningPlayerNumber;
         private SceneItem ship;
 
@@ -33,7 +36,7 @@ namespace Spacewar
         public VictoryScreen(Game game)
             : base(game, victoryScreen, TimeSpan.Zero, GameState.LogoSplash)
         {
-            mainTexture = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + victoryScreen);
+            mainTexture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + victoryScreen);
             Sound.PlayCue(Sounds.TitleMusic);
 
             //Whoever won we need to render their ship.

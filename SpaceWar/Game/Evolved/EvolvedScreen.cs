@@ -251,7 +251,7 @@ namespace Spacewar
             //If this is the end of level then show the overlays
             if (ended)
             {
-                Texture2D overlayTexture = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + @"textures\In-game_score_overlay");
+                ITexture2D overlayTexture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"textures\In-game_score_overlay");
 
                 SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque);
 

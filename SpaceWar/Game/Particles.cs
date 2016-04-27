@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 #region Using Statements
@@ -57,7 +60,7 @@ namespace Spacewar
                 {
                     if (particle is Particle)
                     {
-                        batch.Draw(SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + particleTexture),
+                        batch.Draw(SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + particleTexture),
                             new Vector2(particle.Position.X, particle.Position.Y),
                             null, new Color(((Particle)particle).Color), 0,
                             new Vector2(16, 16), .2f,

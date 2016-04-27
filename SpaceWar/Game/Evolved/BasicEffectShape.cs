@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 #region Using Statements
@@ -55,7 +58,7 @@ namespace Spacewar
         private static Color cockpit2 = new Color(255, 255, (byte)(.373f * 255), 0);
         private static Color engines = new Color((byte)(.925f * 255), (byte)(.529f * 255), 255, 0);
 
-        private Texture2D texture;
+        private ITexture2D texture;
         private int skinNumber;
         private int shapeNumber;
         private BasicEffectShapes shape = BasicEffectShapes.Projectile;
@@ -306,7 +309,7 @@ namespace Spacewar
             model = SpacewarGame.ContentManager.Load<Model>(SpacewarGame.Settings.MediaPath + shipMesh[(int)player, shapeNumber]);
 
             //Matching Textures
-            texture = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + String.Format(shipDiffuse[(int)player, shapeNumber], (skinNumber + 1)));
+            texture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + String.Format(shipDiffuse[(int)player, shapeNumber], (skinNumber + 1)));
 
             //Point to the right material array for this ship
             material = shipMaterials[(int)player, shapeNumber];
@@ -344,7 +347,7 @@ namespace Spacewar
 
             //Matching Textures
             if (shape == BasicEffectShapes.Asteroid || shape == BasicEffectShapes.Projectile)
-                texture = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + textureNames[shapeNumber]);
+                texture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + textureNames[shapeNumber]);
 
             SetupEffect();
         }
@@ -391,7 +394,7 @@ namespace Spacewar
                         }
                         else
                         {
-                            texture = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + textureNames[i]);
+                            texture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + textureNames[i]);
                         }
                     }
 
@@ -436,7 +439,7 @@ namespace Spacewar
                 model = SpacewarGame.ContentManager.Load<Model>(SpacewarGame.Settings.MediaPath + shipMesh[(int)player, shapeNumber]);
 
                 //Matching Textures
-                texture = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + String.Format(shipDiffuse[(int)player, shapeNumber], (skinNumber + 1)));
+                texture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + String.Format(shipDiffuse[(int)player, shapeNumber], (skinNumber + 1)));
             }
             else
             {
@@ -445,7 +448,7 @@ namespace Spacewar
 
                 //Matching Textures
                 if (shape == BasicEffectShapes.Asteroid || shape == BasicEffectShapes.Projectile)
-                    texture = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + textureNames[shapeNumber]);
+                    texture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + textureNames[shapeNumber]);
             }
 
             if (deviceCreated)

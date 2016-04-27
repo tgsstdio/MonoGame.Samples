@@ -238,6 +238,48 @@ namespace Spacewar
         /// </summary>
         public static void Initialize()
         {
+			//#if !ANDROID
+			//			using (var stream = TitleContainer.OpenStream(settingsFile))
+			//			{
+			//#else
+			//			using (var fileStream = Game.Activity.Assets.Open(settingsFile))
+			//			{
+			//				MemoryStream stream = new MemoryStream();
+			//				fileStream.CopyTo(stream);
+			//				stream.Position = 0;
+			//#endif
+
+			var nonStreamingWaveBankFilename = "WaveBank";
+
+			nonStreamingWaveBankFilename = FileHelpers.NormalizeFilePathSeparators(nonStreamingWaveBankFilename);
+
+			#if !ANDROID
+			BinaryReader reader = new BinaryReader(TitleContainer.OpenStream(nonStreamingWaveBankFilename));
+			#else 
+			Stream stream = Game.Activity.Assets.Open(nonStreamingWaveBankFilename);
+			MemoryStream ms = new MemoryStream();
+			stream.CopyTo( ms );
+			stream.Close();
+			ms.Position = 0;
+			BinaryReader reader = new BinaryReader(ms);
+			#endif
+
+			var fileName = "SoundBank";
+
+			fileName = FileHelpers.NormalizeFilePathSeparators(fileName);
+
+			#if !ANDROID
+			using (var stream = DefaultTitleContainer.OpenStream(fileName))
+			{
+			}
+			#else
+			using (var fileStream = Game.Activity.Assets.Open(fileName))
+			{
+			MemoryStream stream = new MemoryStream();
+			fileStream.CopyTo(stream);
+			stream.Position = 0;
+			#endif
+
             engine = new AudioEngine(SpacewarGame.Settings.MediaPath + @"audio\spacewar.xgs");
             wavebank = new WaveBank(engine, SpacewarGame.Settings.MediaPath + @"audio\spacewar.xwb");
             soundbank = new SoundBank(engine, SpacewarGame.Settings.MediaPath + @"audio\spacewar.xsb");

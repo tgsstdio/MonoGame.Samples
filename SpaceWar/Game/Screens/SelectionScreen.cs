@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 #region Using Statements
@@ -24,7 +27,7 @@ namespace Spacewar
     public class SelectionScreen : Screen
     {
         private static string selectionTexture = @"textures\ship_select_FINAL";
-        Texture2D mainTexture;
+        ITexture2D mainTexture;
         private Vector4 white = new Vector4(1f, 1f, 1f, 1f);
 
         private SceneItem[] ships = new SceneItem[2];
@@ -42,7 +45,7 @@ namespace Spacewar
         public SelectionScreen(Game game)
             : base(game)
         {
-            mainTexture = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + selectionTexture);
+            mainTexture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + selectionTexture);
 
             //Start menu music
             menuMusic = Sound.Play(Sounds.MenuMusic);

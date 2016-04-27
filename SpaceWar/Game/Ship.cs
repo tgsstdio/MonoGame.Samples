@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 #region Using Statements
@@ -405,7 +408,7 @@ namespace Spacewar
 
                 if (showThrust && evolved)
                 {
-                    Texture2D engine = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + @"textures\thrust_stripSmall");
+                    ITexture2D engine = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"textures\thrust_stripSmall");
                     batch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
 
                     foreach (Vector4 engineOffset in engineOffsets[(int)player, (int)SpacewarGame.Players[(int)player].ShipClass])

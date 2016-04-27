@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 #region Using Statements
@@ -55,7 +58,7 @@ namespace Spacewar
         private static Color cockpit2 = new Color(255, 255, (byte)(.373f * 255), 0);
         private static Color engines = new Color((byte)(.925f * 255), (byte)(.529f * 255), 255, 0);
 
-        private Texture2D texture;
+        private ITexture2D texture;
         private TextureCube reflection1;
         private TextureCube reflection2;
         private int skinNumber;
@@ -64,7 +67,7 @@ namespace Spacewar
         private PlayerIndex player;
 
         private Model model; //New content Pipeline Mesh
-        private Texture2D blackTexture;
+        private ITexture2D blackTexture;
 
         string[] modelNames = null;
         string[] textureNames = null;
@@ -330,7 +333,7 @@ namespace Spacewar
             pointFactorParam = effect.Parameters["PointFactor"];
             materialParam = effect.Parameters["Material"];
 
-            blackTexture = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + @"Textures\Black");
+            blackTexture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"Textures\Black");
 
             SetupEffect();
         }
@@ -344,7 +347,7 @@ namespace Spacewar
             pointColorParam.SetValue(SpacewarGame.Settings.ShipLights[scene].PointColor);
             pointFactorParam.SetValue(SpacewarGame.Settings.ShipLights[scene].PointFactor);
 
-            //normalTextureParam.SetValue((Texture2D)null); //Normal maps not currently used
+            //normalTextureParam.SetValue((ITexture2D)null); //Normal maps not currently used
         }
 
         public void CreateShip()
@@ -401,7 +404,7 @@ namespace Spacewar
                 model = SpacewarGame.ContentManager.Load<Model>(SpacewarGame.Settings.MediaPath + shipMesh[(int)player, shapeNumber]);
 
                 //Matching Textures
-                texture = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + String.Format(shipDiffuse[(int)player, shapeNumber], (skinNumber + 1)));
+                texture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + String.Format(shipDiffuse[(int)player, shapeNumber], (skinNumber + 1)));
 
                 //_normal = SpacewarGame.TextureCache[shipNormal[(int)_player, _shapeNumber]]; //Normal maps not currently used
 
@@ -420,7 +423,7 @@ namespace Spacewar
 
                 //Matching Textures
                 if (shape == EvolvedShapes.Asteroid || shape == EvolvedShapes.Projectile)
-                    texture = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + textureNames[shapeNumber]);
+                    texture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + textureNames[shapeNumber]);
             }
 
             int i = 0;
@@ -436,7 +439,7 @@ namespace Spacewar
                         }
                         else
                         {
-                            texture = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + textureNames[i]);
+                            texture = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + textureNames[i]);
                         }
                     }
 
@@ -456,7 +459,7 @@ namespace Spacewar
                     {
                         //Material is white
                         materialParam.SetValue(Color.White.ToVector4());
-                        reflectionTextureParam.SetValue((Texture2D)null);
+                        reflectionTextureParam.SetValue((ITexture2D)null);
                     }
 
                     effect.Techniques[0].Passes[0].Apply();

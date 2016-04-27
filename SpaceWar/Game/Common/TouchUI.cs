@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
 using System;
 using System.Linq;
+using MonoGame.Core;
 
 
 
@@ -24,7 +25,7 @@ namespace Spacewar
         // UI elements.
         private Viewport _Viewport;
         private Vector2[] _StickLocation = new Vector2[(int)Sticks.Count];
-        private Texture2D[] _StickTexture = new Texture2D[(int)Sticks.Count];
+        private ITexture2D[] _StickTexture = new ITexture2D[(int)Sticks.Count];
 
         // Current touch action information.
         private int[] _CurrentTouchId = new int[(int)Sticks.Count];
@@ -54,8 +55,8 @@ namespace Spacewar
                 (float)(offsety));
 
             // Setup the UI.
-            _StickTexture[(int)Sticks.Player1] = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + "UI/RightThumbstick");
-            _StickTexture[(int)Sticks.Player2] = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + "UI/RightThumbstick");
+            _StickTexture[(int)Sticks.Player1] = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + "UI/RightThumbstick");
+            _StickTexture[(int)Sticks.Player2] = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + "UI/RightThumbstick");
         }
 
         private void ProcessTouchEvents(Sticks stick)
@@ -173,7 +174,7 @@ namespace Spacewar
 
     public static class Vector2DrawExtension
     {
-        public static Vector2 GetDrawCenter(this Vector2 input, Texture2D image)
+        public static Vector2 GetDrawCenter(this Vector2 input, ITexture2D image)
         {
             var centreX = input.X - (image.Width / 2);
             var centreY = input.Y - (image.Height / 2);

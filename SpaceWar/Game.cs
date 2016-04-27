@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 #region Using Statements
@@ -154,7 +157,7 @@ namespace Spacewar
             IsFixedTimeStep = false;
         }        
 
-        protected override void Initialize()
+        public override void Initialize()
         {
             // game initialization code here
 
@@ -172,7 +175,7 @@ namespace Spacewar
             base.Initialize();
         }
 
-        protected override void BeginRun()
+        public override void BeginRun()
         {
             Sound.PlayCue(Sounds.TitleMusic);
 
@@ -190,7 +193,7 @@ namespace Spacewar
             base.BeginRun();
         }
 
-        protected override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             TimeSpan elapsedTime = gameTime.ElapsedGameTime;
             TimeSpan time = gameTime.TotalGameTime;
@@ -260,7 +263,7 @@ namespace Spacewar
             base.Update(gameTime);
         }
 
-        protected override bool BeginDraw()
+        public override bool BeginDraw()
         {
             if (!base.BeginDraw())
                 return false;
@@ -270,7 +273,7 @@ namespace Spacewar
             return true;
         }
 
-        protected override void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
             graphics.GraphicsDevice.Clear(ClearOptions.DepthBuffer, 
                 Color.CornflowerBlue, 1.0f, 0);            
@@ -281,7 +284,7 @@ namespace Spacewar
 
         }
 
-        protected override void EndDraw()
+        public override void EndDraw()
         {
             EndDrawScaling();
 
@@ -310,13 +313,13 @@ namespace Spacewar
                 gameLevel = 1;
 
                 currentScreen.Shutdown();
-                currentScreen = new SelectionScreen(this);
+                currentScreen = new SelectionScreen();
                 gameState = GameState.ShipSelection;
             }
             else if (gameState == GameState.PlayEvolved && NextState == GameState.ShipUpgrade)
             {
                 currentScreen.Shutdown();
-                currentScreen = new ShipUpgradeScreen(this);
+                currentScreen = new ShipUpgradeScreen();
                 gameState = GameState.ShipUpgrade;
             }
             else if ((gameState == GameState.ShipSelection || GameState == GameState.ShipUpgrade) && NextState == GameState.PlayEvolved)
@@ -324,7 +327,7 @@ namespace Spacewar
                 Sound.PlayCue(Sounds.MenuAdvance);
 
                 currentScreen.Shutdown();
-                currentScreen = new EvolvedScreen(this);
+                currentScreen = new EvolvedScreen();
                 gameState = GameState.PlayEvolved;
             }
             else if (gameState == GameState.LogoSplash && NextState == GameState.PlayRetro)
@@ -333,13 +336,13 @@ namespace Spacewar
                 players = new Player[2] { new Player(), new Player() };
 
                 currentScreen.Shutdown();
-                currentScreen = new RetroScreen(this);
+                currentScreen = new RetroScreen();
                 gameState = GameState.PlayRetro;
             }
             else if (gameState == GameState.PlayEvolved && NextState == GameState.Victory)
             {
                 currentScreen.Shutdown();
-                currentScreen = new VictoryScreen(this);
+                currentScreen = new VictoryScreen();
                 gameState = GameState.Victory;
             }
             else
@@ -350,7 +353,7 @@ namespace Spacewar
             }
         }
 
-        protected override void LoadContent()
+		public override void LoadContent()
         {
             base.LoadContent();
 
@@ -363,7 +366,7 @@ namespace Spacewar
 
             if (enableDrawScaling)
             {
-                PresentationParameters pp = graphics.GraphicsDevice.PresentationParameters;
+                IPresentationParameters pp = graphics.GraphicsDevice.PresentationParameters;
 
                 drawBuffer = new RenderTarget2D(graphics.GraphicsDevice,
                                                 FixedDrawingWidth, FixedDrawingHeight,
@@ -376,7 +379,7 @@ namespace Spacewar
             XInputHelper.Touch.Initialise(this);
         }
 
-        protected override void UnloadContent()
+        public override void UnloadContent()
         {
             base.UnloadContent();
 
@@ -403,7 +406,7 @@ namespace Spacewar
 
         private void ToggleFullScreen()
         {
-            PresentationParameters presentation = graphics.GraphicsDevice.PresentationParameters;
+            IPresentationParameters presentation = graphics.GraphicsDevice.PresentationParameters;
 
             if (presentation.IsFullScreen)
             {   // going windowed
@@ -441,7 +444,7 @@ namespace Spacewar
 
             graphics.GraphicsDevice.SetRenderTarget(null);
 
-            PresentationParameters presentation = graphics.GraphicsDevice.PresentationParameters;
+            IPresentationParameters presentation = graphics.GraphicsDevice.PresentationParameters;
 
             float outputAspect = (float)presentation.BackBufferWidth / (float)presentation.BackBufferHeight;
             float preferredAspect = (float)FixedDrawingWidth / (float)FixedDrawingHeight;

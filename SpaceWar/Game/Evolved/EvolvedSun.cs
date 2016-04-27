@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 #region Using Statements
@@ -29,7 +32,7 @@ namespace Spacewar
         private EffectParameter sun1TextureParam;
         private EffectParameter blendFactor;
 
-        private Texture2D[] sun;
+        private ITexture2D[] sun;
 
         private int currentFrame;
         private double currentTime;
@@ -56,13 +59,13 @@ namespace Spacewar
 
             //Preload the textures into the cache
             int numFrames = 5;
-            sun = new Texture2D[numFrames];
+            sun = new ITexture2D[numFrames];
 
-            sun[0] = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + @"textures\suntest1");
-            sun[1] = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + @"textures\suntest2");
-            sun[2] = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + @"textures\suntest3");
-            sun[3] = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + @"textures\suntest4");
-            sun[4] = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + @"textures\suntest5");
+            sun[0] = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"textures\suntest1");
+            sun[1] = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"textures\suntest2");
+            sun[2] = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"textures\suntest3");
+            sun[3] = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"textures\suntest4");
+            sun[4] = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"textures\suntest5");
         }
 
         public override void Update(TimeSpan timeSpan, TimeSpan elapsedTime)

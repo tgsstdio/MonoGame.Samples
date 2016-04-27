@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 #region Using Statements
@@ -38,9 +41,9 @@ namespace Spacewar
         private EffectParameter layer1OffsetParam;
         private EffectParameter layer2OffsetParam;
 
-        private Texture2D layer1;
-        private Texture2D layer2;
-        private Texture2D layer3;
+        private ITexture2D layer1;
+        private ITexture2D layer2;
+        private ITexture2D layer3;
 
         public EvolvedBackdrop(Game game)
             : base(game)
@@ -77,9 +80,9 @@ namespace Spacewar
 
             //Preload the textures into the cache
             // TODO: This doesn't support multiple "boards"
-            layer1 = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + @"textures\B1_nebula01");
-            layer2 = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + @"textures\B1_nebula02");
-            layer3 = SpacewarGame.ContentManager.Load<Texture2D>(SpacewarGame.Settings.MediaPath + @"textures\B1_stars");
+            layer1 = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"textures\B1_nebula01");
+            layer2 = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"textures\B1_nebula02");
+            layer3 = SpacewarGame.ContentManager.Load<ITexture2D>(SpacewarGame.Settings.MediaPath + @"textures\B1_stars");
         }
 
         /// <summary>
