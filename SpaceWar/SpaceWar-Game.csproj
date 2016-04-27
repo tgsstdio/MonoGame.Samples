@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{56EEC43C-6C50-4EAB-9F39-EF980D6934B7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SpaceWarGame</RootNamespace>
+    <AssemblyName>SpaceWar-Game</AssemblyName>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="Game.cs" />
+    <Compile Include="Game\Asteroid.cs" />
+    <Compile Include="Game\camera.cs" />
+    <Compile Include="Game\Enums.cs" />
+    <Compile Include="Game\Font.cs" />
+    <Compile Include="Game\Particle.cs" />
+    <Compile Include="Game\Particles.cs" />
+    <Compile Include="Game\Player.cs" />
+    <Compile Include="Game\Projectile.cs" />
+    <Compile Include="Game\Projectiles.cs" />
+    <Compile Include="Game\Settings.cs" />
+    <Compile Include="Game\Ship.cs" />
+    <Compile Include="Game\Sound.cs" />
+    <Compile Include="Game\Sun.cs" />
+    <Compile Include="Game\Common\GamePadHelper.cs" />
+    <Compile Include="Game\Common\GamePads.cs" />
+    <Compile Include="Game\Common\KeyboardHelper.cs" />
+    <Compile Include="Game\Common\Keymap.cs" />
+    <Compile Include="Game\Common\TouchUI.cs" />
+    <Compile Include="Game\Common\XInputHelper.cs" />
+    <Compile Include="Game\Evolved\BasicEffectShape.cs" />
+    <Compile Include="Game\Evolved\EvolvedBackdrop.cs" />
+    <Compile Include="Game\Evolved\EvolvedScreen.cs" />
+    <Compile Include="Game\Evolved\EvolvedShape.cs" />
+    <Compile Include="Game\Evolved\EvolvedSun.cs" />
+    <Compile Include="Game\Retro\RetroProjectiles.cs" />
+    <Compile Include="Game\Retro\RetroScreen.cs" />
+    <Compile Include="Game\Retro\RetroShip.cs" />
+    <Compile Include="Game\Retro\RetroStarfield.cs" />
+    <Compile Include="Game\Retro\RetroSun.cs" />
+    <Compile Include="Game\SceneGraph\FullScreenSplash.cs" />
+    <Compile Include="Game\SceneGraph\SceneItem.cs" />
+    <Compile Include="Game\SceneGraph\Screen.cs" />
+    <Compile Include="Game\SceneGraph\SpacewarSceneItem.cs" />
+    <Compile Include="Game\Screens\SelectionScreen.cs" />
+    <Compile Include="Game\Screens\ShipUpgradeScreen.cs" />
+    <Compile Include="Game\Screens\SpacewarScreen.cs" />
+    <Compile Include="Game\Screens\TitleScreen.cs" />
+    <Compile Include="Game\Screens\VictoryScreen.cs" />
+    <Compile Include="Game\Shapes\Shape.cs" />
+    <Compile Include="Game\Shapes\VectorShape.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\MonoGame.Core\MonoGame.Core.csproj">
+      <Project>{699977AD-6D8C-4E0B-ADDA-554B66002D08}</Project>
+      <Name>MonoGame.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Game\SpacewarThumbnail.png" />
+    <None Include="Game\Spacewar_Template.ico" />
+  </ItemGroup>
+</Project>
