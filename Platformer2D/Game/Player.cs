@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 using System;
@@ -133,11 +136,11 @@ namespace Platformer2D
         public void LoadContent()
         {
             // Load animated textures.
-            idleAnimation = new Animation(Level.Content.Load<Texture2D>("Sprites/Player/Idle"), 0.1f, true);
-            runAnimation = new Animation(Level.Content.Load<Texture2D>("Sprites/Player/Run"), 0.1f, true);
-            jumpAnimation = new Animation(Level.Content.Load<Texture2D>("Sprites/Player/Jump"), 0.1f, false);
-            celebrateAnimation = new Animation(Level.Content.Load<Texture2D>("Sprites/Player/Celebrate"), 0.1f, false);
-            dieAnimation = new Animation(Level.Content.Load<Texture2D>("Sprites/Player/Die"), 0.1f, false);
+			idleAnimation = new Animation(Level.Content.Load<ITexture2D>("Sprites/Player/Idle"), 0.1f, true);
+			runAnimation = new Animation(Level.Content.Load<ITexture2D>("Sprites/Player/Run"), 0.1f, true);
+			jumpAnimation = new Animation(Level.Content.Load<ITexture2D>("Sprites/Player/Jump"), 0.1f, false);
+            celebrateAnimation = new Animation(Level.Content.Load<ITexture2D>("Sprites/Player/Celebrate"), 0.1f, false);
+			dieAnimation = new Animation(Level.Content.Load<ITexture2D>("Sprites/Player/Die"), 0.1f, false);
 
             // Calculate bounds within texture size.            
             int width = (int)(idleAnimation.FrameWidth * 0.4);

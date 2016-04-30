@@ -1,4 +1,4 @@
-F#region File Description
+#region File Description
 //-----------------------------------------------------------------------------
 // Asteroid.cs
 //

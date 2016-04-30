@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 using System;
@@ -24,7 +27,7 @@ namespace Platformer2D
     public class PlatformerGame : Microsoft.Xna.Framework.Game
     {
         // Resources for drawing.
-        private GraphicsDeviceManager graphics;
+        private IGraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         Vector2 baseScreenSize = new Vector2(800, 480);
         private Matrix globalTransformation;
@@ -32,9 +35,9 @@ namespace Platformer2D
         // Global content.
         private SpriteFont hudFont;
 
-        private Texture2D winOverlay;
-        private Texture2D loseOverlay;
-        private Texture2D diedOverlay;
+        private ITexture2D winOverlay;
+        private ITexture2D loseOverlay;
+        private ITexture2D diedOverlay;
 
         // Meta-level game state.
         private int levelIndex = -1;
@@ -80,18 +83,18 @@ namespace Platformer2D
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
         /// </summary>
-        protected override void LoadContent()
+        public override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch();
 
             // Load fonts
             hudFont = Content.Load<SpriteFont>("Fonts/Hud");
 
             // Load overlay textures
-            winOverlay = Content.Load<Texture2D>("Overlays/you_win");
-            loseOverlay = Content.Load<Texture2D>("Overlays/you_lose");
-            diedOverlay = Content.Load<Texture2D>("Overlays/you_died");
+            winOverlay = Content.Load<ITexture2D>("Overlays/you_win");
+			loseOverlay = Content.Load<ITexture2D>("Overlays/you_lose");
+			diedOverlay = Content.Load<ITexture2D>("Overlays/you_died");
 
             //Work out how much we need to scale our graphics to fill the screen
             float horScaling = GraphicsDevice.PresentationParameters.BackBufferWidth / baseScreenSize.X;
@@ -99,7 +102,7 @@ namespace Platformer2D
             Vector3 screenScalingFactor = new Vector3(horScaling, verScaling, 1);
             globalTransformation = Matrix.CreateScale(screenScalingFactor);
 
-            virtualGamePad = new VirtualGamePad(baseScreenSize, globalTransformation, Content.Load<Texture2D>("Sprites/VirtualControlArrow"));
+            virtualGamePad = new VirtualGamePad(baseScreenSize, globalTransformation, Content.Load<ITexture2D>("Sprites/VirtualControlArrow"));
 
             //Known issue that you get exceptions if you use Media PLayer while connected to your PC
             //See http://social.msdn.microsoft.com/Forums/en/windowsphone7series/thread/c8a243d2-d360-46b1-96bd-62b1ef268c66
@@ -120,7 +123,7 @@ namespace Platformer2D
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             // Handle polling for our input and handling high-level input
             HandleInput(gameTime);
@@ -200,7 +203,7 @@ namespace Platformer2D
         /// Draws the game from background to foreground.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
@@ -245,7 +248,7 @@ namespace Platformer2D
             DrawShadowedString(hudFont, "SCORE: " + level.Score.ToString(), hudLocation + new Vector2(0.0f, timeHeight * 1.2f), Color.Yellow);
            
             // Determine the status overlay message to show.
-            Texture2D status = null;
+            ITexture2D status = null;
             if (level.TimeRemaining == TimeSpan.Zero)
             {
                 if (level.ReachedExit)

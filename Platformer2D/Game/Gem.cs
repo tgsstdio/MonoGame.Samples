@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 using System;
@@ -19,7 +22,7 @@ namespace Platformer2D
     /// </summary>
     class Gem
     {
-        private Texture2D texture;
+        private ITexture2D texture;
         private Vector2 origin;
         private SoundEffect collectedSound;
 
@@ -74,7 +77,7 @@ namespace Platformer2D
         /// </summary>
         public void LoadContent()
         {
-            texture = Level.Content.Load<Texture2D>("Sprites/Gem");
+            texture = Level.Content.Load<ITexture2D>("Sprites/Gem");
             origin = new Vector2(texture.Width / 2.0f, texture.Height / 2.0f);
             collectedSound = Level.Content.Load<SoundEffect>("Sounds/GemCollected");
         }

@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 using System;
@@ -42,7 +45,7 @@ namespace Platformer2D
     /// </summary>
     struct Tile
     {
-        public Texture2D Texture;
+		public ITexture2D Texture;
         public TileCollision Collision;
 
         public const int Width = 40;
@@ -53,7 +56,7 @@ namespace Platformer2D
         /// <summary>
         /// Constructs a new tile.
         /// </summary>
-        public Tile(Texture2D texture, TileCollision collision)
+		public Tile(ITexture2D texture, TileCollision collision)
         {
             Texture = texture;
             Collision = collision;

@@ -12,13 +12,10 @@ using MonoGame.Core;
 
 #region Using Statements
 using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Storage;
 #endregion
 
 namespace Spacewar
@@ -72,7 +69,7 @@ namespace Spacewar
         private IGraphicsDeviceManager graphics;
 
         private bool enableDrawScaling;
-        private RenderTarget2D drawBuffer;
+        private IRenderTarget2D drawBuffer;
         private SpriteBatch spriteBatch;
 
         private Screen currentScreen;
@@ -124,7 +121,7 @@ namespace Spacewar
             }
         }
 
-        public static ContentManager ContentManager
+        public static IContentManager ContentManager
         {
             get
             {
@@ -299,7 +296,7 @@ namespace Spacewar
                 if (currentScreen != null)
                     currentScreen.Shutdown();
 
-                currentScreen = new TitleScreen(this);
+                currentScreen = new TitleScreen();
                 gameState = GameState.LogoSplash;
             }
             else if (gameState == GameState.LogoSplash && NextState == GameState.ShipSelection)

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
+using MonoGame.Core;
 
 namespace Platformer2D
 {
@@ -10,12 +11,12 @@ namespace Platformer2D
     {
         private readonly Vector2 baseScreenSize;
         private Matrix globalTransformation;
-        private readonly Texture2D texture;
+		private readonly ITexture2D texture;
 
         private float secondsSinceLastInput;
         private float opacity;
 
-        public VirtualGamePad(Vector2 baseScreenSize, Matrix globalTransformation, Texture2D texture)
+		public VirtualGamePad(Vector2 baseScreenSize, Matrix globalTransformation, ITexture2D texture)
         {
             this.baseScreenSize = baseScreenSize;
             this.globalTransformation = Matrix.Invert(globalTransformation);

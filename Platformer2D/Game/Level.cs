@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 using System;
@@ -27,7 +30,7 @@ namespace Platformer2D
     {
         // Physical structure of the level.
         private Tile[,] tiles;
-        private Texture2D[] layers;
+		private ITexture2D[] layers;
         // The layer which entities are drawn on top of.
         private const int EntityLayer = 2;
 
@@ -70,11 +73,11 @@ namespace Platformer2D
         private const int PointsPerSecond = 5;
 
         // Level content.        
-        public ContentManager Content
+        public IContentManager Content
         {
             get { return content; }
         }
-        ContentManager content;
+        IContentManager content;
 
         private SoundEffect exitReachedSound;
 
@@ -100,12 +103,12 @@ namespace Platformer2D
 
             // Load background layer textures. For now, all levels must
             // use the same backgrounds and only use the left-most part of them.
-            layers = new Texture2D[3];
+            layers = new ITexture2D[3];
             for (int i = 0; i < layers.Length; ++i)
             {
                 // Choose a random segment if each background layer for level variety.
                 int segmentIndex = levelIndex;
-                layers[i] = Content.Load<Texture2D>("Backgrounds/Layer" + i + "_" + segmentIndex);
+				layers[i] = Content.Load<ITexture2D>("Backgrounds/Layer" + i + "_" + segmentIndex);
             }
 
             // Load sounds.
@@ -239,7 +242,7 @@ namespace Platformer2D
         /// <returns>The new tile.</returns>
         private Tile LoadTile(string name, TileCollision collision)
         {
-            return new Tile(Content.Load<Texture2D>("Tiles/" + name), collision);
+			return new Tile(Content.Load<ITexture2D>("Tiles/" + name), collision);
         }
 
 
@@ -535,7 +538,7 @@ namespace Platformer2D
                 for (int x = 0; x < Width; ++x)
                 {
                     // If there is a visible tile in that position
-                    Texture2D texture = tiles[x, y].Texture;
+					ITexture2D texture = tiles[x, y].Texture;
                     if (texture != null)
                     {
                         // Draw it in screen space.

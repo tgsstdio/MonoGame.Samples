@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 using System;
@@ -25,11 +28,11 @@ namespace Platformer2D
         /// <summary>
         /// All frames in the animation arranged horizontally.
         /// </summary>
-        public Texture2D Texture
+		public ITexture2D Texture
         {
             get { return texture; }
         }
-        Texture2D texture;
+		ITexture2D texture;
 
         /// <summary>
         /// Duration of time to show each frame.
@@ -78,7 +81,7 @@ namespace Platformer2D
         /// <summary>
         /// Constructors a new animation.
         /// </summary>        
-        public Animation(Texture2D texture, float frameTime, bool isLooping)
+		public Animation(ITexture2D texture, float frameTime, bool isLooping)
         {
             this.texture = texture;
             this.frameTime = frameTime;
