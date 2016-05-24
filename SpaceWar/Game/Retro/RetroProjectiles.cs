@@ -64,7 +64,7 @@ namespace Spacewar
                 //All bullets are rendered in a single draw call.
 
                 //Build a new vertex buffer with all the bullets
-                IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
+                //IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
                 GraphicsDevice device = graphicsService.GraphicsDevice;
 
                 // Don't exceed the maximum number of vertices in our default Vertex Buffer!

@@ -463,7 +463,7 @@ namespace Spacewar
                     
                     if (meshPart.PrimitiveCount > 0)
                     {
-                        IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
+                        //IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
                         GraphicsDevice gd = graphicsService.GraphicsDevice;
 
                         gd.SetVertexBuffer(meshPart.VertexBuffer);

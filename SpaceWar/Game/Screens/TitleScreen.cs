@@ -93,7 +93,7 @@ namespace Spacewar
             base.Render();
 
             //Once all the media is cached we can show the menu
-            IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)game.Services.GetService(typeof(IGraphicsDeviceService));
+            //IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)game.Services.GetService(typeof(IGraphicsDeviceService));
             GraphicsDevice device = graphicsService.GraphicsDevice;
 
             SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque);

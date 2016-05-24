@@ -5,6 +5,9 @@
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
 //-----------------------------------------------------------------------------
+using MonoGame.Core;
+
+
 #endregion
 
 #region Using Statements
@@ -111,7 +114,7 @@ namespace Spacewar
             //Its used for the backdrop of evolved which is a full screen quad with texture coordinates derived from
             //other shader variables
             //TODO: Fix up shader for evolved backdrop to ignore the color in the vertex format
-            IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)game.Services.GetService(typeof(IGraphicsDeviceService));
+            //IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)game.Services.GetService(typeof(IGraphicsDeviceService));
 
             VertexBuffer Buffer = new VertexBuffer(graphicsService.GraphicsDevice, typeof(VertexPositionColor), Columns * Rows * 6, BufferUsage.WriteOnly);
             //VertexPositionColor data = Buffer.Lock<PositionOnly>(0, 0, LockFlags.None);

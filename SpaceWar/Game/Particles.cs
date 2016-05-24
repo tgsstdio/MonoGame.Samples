@@ -35,7 +35,7 @@ namespace Spacewar
         {
             if (game != null)
             {
-                IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)game.Services.GetService(typeof(IGraphicsDeviceService));
+                //IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)game.Services.GetService(typeof(IGraphicsDeviceService));
                 batch = new SpriteBatch(graphicsService.GraphicsDevice);
             }
         }
@@ -47,7 +47,7 @@ namespace Spacewar
         {
             if (Count != 0)
             {
-                IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
+                //IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
                 GraphicsDevice device = graphicsService.GraphicsDevice;
 
                 batch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, 
@@ -155,7 +155,7 @@ namespace Spacewar
 
         public override void OnCreateDevice()
         {
-            IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
+            //IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
             batch = new SpriteBatch(graphicsService.GraphicsDevice);
         }
     }

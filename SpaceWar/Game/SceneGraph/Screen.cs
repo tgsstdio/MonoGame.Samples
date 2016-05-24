@@ -118,7 +118,7 @@ namespace Spacewar
         public virtual void OnCreateDevice()
         {
             //Re-Create the Sprite Batch!
-            IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)game.Services.GetService(typeof(IGraphicsDeviceService));
+           // IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)game.Services.GetService(typeof(IGraphicsDeviceService));
             batch = new SpriteBatch(graphicsService.GraphicsDevice);
         }
     }

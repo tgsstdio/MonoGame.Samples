@@ -245,7 +245,7 @@ namespace Spacewar
         /// </summary>
         public override void Render()
         {
-            IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
+            //IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
 
             GraphicsDevice device = graphicsService.GraphicsDevice;
 

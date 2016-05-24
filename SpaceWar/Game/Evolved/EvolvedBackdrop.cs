@@ -56,7 +56,7 @@ namespace Spacewar
         /// </summary>
         public override void Create()
         {
-            IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
+            //IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
             buffer = new VertexBuffer(graphicsService.GraphicsDevice, typeof(VertexPositionColor), 6, BufferUsage.WriteOnly);
 
             VertexPositionColor[] data = new VertexPositionColor[6];
@@ -113,7 +113,7 @@ namespace Spacewar
         /// </summary>
         public override void Render()
         {
-            IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
+            //IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)GameInstance.Services.GetService(typeof(IGraphicsDeviceService));
             GraphicsDevice device = graphicsService.GraphicsDevice;
 
             base.Render();

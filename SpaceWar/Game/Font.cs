@@ -121,7 +121,7 @@ namespace Spacewar
         {
             if (game != null)
             {
-                IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)game.Services.GetService(typeof(IGraphicsDeviceService));
+                //IGraphicsDeviceService graphicsService = (IGraphicsDeviceService)game.Services.GetService(typeof(IGraphicsDeviceService));
 
                 if (batch == null)
                     batch = new SpriteBatch(graphicsService.GraphicsDevice);
