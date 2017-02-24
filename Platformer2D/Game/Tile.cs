@@ -13,6 +13,7 @@ using MonoGame.Core;
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Graphics;
 
 namespace Platformer2D
 {
@@ -45,7 +46,7 @@ namespace Platformer2D
     /// </summary>
     struct Tile
     {
-		public ITexture2D Texture;
+		public IMgTexture2D Texture;
         public TileCollision Collision;
 
         public const int Width = 40;
@@ -56,7 +57,7 @@ namespace Platformer2D
         /// <summary>
         /// Constructs a new tile.
         /// </summary>
-		public Tile(ITexture2D texture, TileCollision collision)
+		public Tile(IMgTexture2D texture, TileCollision collision)
         {
             Texture = texture;
             Collision = collision;

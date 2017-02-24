@@ -15,6 +15,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Graphics;
+using MonoGame.Content;
 
 namespace Platformer2D
 {
@@ -104,6 +106,9 @@ namespace Platformer2D
         private float jumpTime;
 
         private Rectangle localBounds;
+        private IMgTexture2DLoader mTextures;
+        private SoundDevice mEffects;
+
         /// <summary>
         /// Gets a rectangle which bounds this player in world space.
         /// </summary>
@@ -121,8 +126,10 @@ namespace Platformer2D
         /// <summary>
         /// Constructors a new player.
         /// </summary>
-        public Player(Level level, Vector2 position)
+        public Player(IMgTexture2DLoader textures, SoundDevice effects, Level level, Vector2 position)
         {
+            this.mTextures = textures;
+            this.mEffects = effects;
             this.level = level;
 
             LoadContent();
@@ -136,11 +143,16 @@ namespace Platformer2D
         public void LoadContent()
         {
             // Load animated textures.
-			idleAnimation = new Animation(Level.Content.Load<ITexture2D>("Sprites/Player/Idle"), 0.1f, true);
-			runAnimation = new Animation(Level.Content.Load<ITexture2D>("Sprites/Player/Run"), 0.1f, true);
-			jumpAnimation = new Animation(Level.Content.Load<ITexture2D>("Sprites/Player/Jump"), 0.1f, false);
-            celebrateAnimation = new Animation(Level.Content.Load<ITexture2D>("Sprites/Player/Celebrate"), 0.1f, false);
-			dieAnimation = new Animation(Level.Content.Load<ITexture2D>("Sprites/Player/Die"), 0.1f, false);
+            // "Sprites/Player/Idle"
+            idleAnimation = new Animation(mTextures.Load( new AssetIdentifier { AssetId = 100U}), 0.1f, true);
+            // "Sprites/Player/Run"
+            runAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 101U }), 0.1f, true);
+            // "Sprites/Player/Jump"
+            jumpAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 102U }), 0.1f, false);
+            // "Sprites/Player/Celebrate"
+            celebrateAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 103U }), 0.1f, false);
+            // "Sprites/Player/Die"
+            dieAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 104U }), 0.1f, false);
 
             // Calculate bounds within texture size.            
             int width = (int)(idleAnimation.FrameWidth * 0.4);
@@ -150,9 +162,9 @@ namespace Platformer2D
             localBounds = new Rectangle(left, top, width, height);
 
             // Load sounds.            
-            killedSound = Level.Content.Load<SoundEffect>("Sounds/PlayerKilled");
-            jumpSound = Level.Content.Load<SoundEffect>("Sounds/PlayerJump");
-            fallSound = Level.Content.Load<SoundEffect>("Sounds/PlayerFall");
+            killedSound = mEffects.Load(new AssetIdentifier { AssetId = 9000U }); // "Sounds/PlayerKilled"
+            jumpSound = mEffects.Load(new AssetIdentifier { AssetId = 9001U }); // "Sounds/PlayerJump"
+            fallSound = mEffects.Load(new AssetIdentifier { AssetId = 9002U }); // "Sounds/PlayerFall"
         }
 
         /// <summary>
@@ -318,7 +330,7 @@ namespace Platformer2D
                 if ((!wasJumping && IsOnGround) || jumpTime > 0.0f)
                 {
                     if (jumpTime == 0.0f)
-                        jumpSound.Play();
+                       mEffects.Play(jumpSound);
 
                     jumpTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
                     sprite.PlayAnimation(jumpAnimation);
@@ -427,9 +439,9 @@ namespace Platformer2D
             isAlive = false;
 
             if (killedBy != null)
-                killedSound.Play();
+                mEffects.Play(killedSound);
             else
-                fallSound.Play();
+                mEffects.Play(fallSound);
 
             sprite.PlayAnimation(dieAnimation);
         }
@@ -445,7 +457,7 @@ namespace Platformer2D
         /// <summary>
         /// Draws the animated player.
         /// </summary>
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, IMgSpriteBatch spriteBatch)
         {
             // Flip the sprite to face the way we are moving.
             if (Velocity.X > 0)

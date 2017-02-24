@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using MonoGame.Core;
+using MonoGame.Graphics;
 
 namespace Platformer2D
 {
@@ -11,12 +12,12 @@ namespace Platformer2D
     {
         private readonly Vector2 baseScreenSize;
         private Matrix globalTransformation;
-		private readonly ITexture2D texture;
+		private readonly IMgTexture2D texture;
 
         private float secondsSinceLastInput;
         private float opacity;
 
-		public VirtualGamePad(Vector2 baseScreenSize, Matrix globalTransformation, ITexture2D texture)
+		public VirtualGamePad(Vector2 baseScreenSize, Matrix globalTransformation, IMgTexture2D texture)
         {
             this.baseScreenSize = baseScreenSize;
             this.globalTransformation = Matrix.Invert(globalTransformation);
@@ -42,7 +43,7 @@ namespace Platformer2D
                 opacity = Math.Min(1, opacity + secondsElapsed * 2);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(IMgSpriteBatch spriteBatch)
         {
             var spriteCenter = new Vector2(64, 64);
             var color = Color.Multiply(Color.White, opacity);

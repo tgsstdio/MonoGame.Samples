@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C21CF74B-55C5-43B6-8D4F-083E7AC78899}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Platformer2D.DesktopGL</RootNamespace>
+    <AssemblyName>Platformer2D.DesktopGL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DryIoc, Version=2.10.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Platformer2D\packages\DryIoc.dll.2.10.1\lib\net45\DryIoc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Magnesium, Version=4.0.6155.29495, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Platformer2D\packages\Magnesium.5.0.4\lib\portable45-net45+win8+wpa81\Magnesium.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Magnesium.PresentationSurfaces.OpenTK, Version=1.0.2.30735, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Platformer2D\packages\Magnesium.PresentationSurfaces.OpenTK.1.0.2\lib\net45\Magnesium.PresentationSurfaces.OpenTK.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Magnesium.Vulkan, Version=5.0.1.33684, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Platformer2D\packages\Magnesium.Vulkan.5.0.2\lib\portable45-net45+win8+wpa81\Magnesium.Vulkan.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OpenTK, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\Platformer2D\packages\OpenTK.2.0.0\lib\net20\OpenTK.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DefaultSoundEffectReader.cs" />
+    <Compile Include="NullGamepadPlatform.cs" />
+    <Compile Include="NullTouchListener.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="OpenTK.dll.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\MonoGame.Audio.OpenAL.DesktopGL\MonoGame.Audio.OpenAL.DesktopGL.csproj">
+      <Project>{d68e983c-fa4d-418a-8353-43c4cde75b23}</Project>
+      <Name>MonoGame.Audio.OpenAL.DesktopGL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MonoGame.Audio.OpenAL\MonoGame.Audio.OpenAL.csproj">
+      <Project>{c06188b4-0c78-42cb-b868-336eb7b6b3df}</Project>
+      <Name>MonoGame.Audio.OpenAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MonoGame.Content.Dirs\MonoGame.Content.Dirs.csproj">
+      <Project>{9d3de491-e6d0-4d12-9a2d-d31b23d7d71d}</Project>
+      <Name>MonoGame.Content.Dirs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MonoGame.Content\MonoGame.Content.csproj">
+      <Project>{e44e47ed-2203-4e45-85a9-c755b10ac044}</Project>
+      <Name>MonoGame.Content</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MonoGame.Core\MonoGame.Core.csproj">
+      <Project>{699977ad-6d8c-4e0b-adda-554b66002d08}</Project>
+      <Name>MonoGame.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MonoGame.Graphics\MonoGame.Graphics.csproj">
+      <Project>{52c293e3-dcc5-43be-a94f-dbe0cf44e25e}</Project>
+      <Name>MonoGame.Graphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MonoGame.Platform.DesktopGL\MonoGame.Platform.DesktopGL.csproj">
+      <Project>{b512c831-4562-447e-9f99-c66f86b1279f}</Project>
+      <Name>MonoGame.Platform.DesktopGL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Platformer2D\Platformer2D.Core.csproj">
+      <Project>{a0f5018e-91d9-4a47-b89a-9e96ad98e79c}</Project>
+      <Name>Platformer2D.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

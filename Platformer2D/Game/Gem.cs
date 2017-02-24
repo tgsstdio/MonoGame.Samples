@@ -14,6 +14,8 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
+using MonoGame.Graphics;
+using MonoGame.Content;
 
 namespace Platformer2D
 {
@@ -22,7 +24,7 @@ namespace Platformer2D
     /// </summary>
     class Gem
     {
-        private ITexture2D texture;
+        private IMgTexture2D texture;
         private Vector2 origin;
         private SoundEffect collectedSound;
 
@@ -33,11 +35,8 @@ namespace Platformer2D
         private Vector2 basePosition;
         private float bounce;
 
-        public Level Level
-        {
-            get { return level; }
-        }
-        Level level;
+        private IMgTexture2DLoader mTextures;
+        private SoundDevice mEffects;
 
         /// <summary>
         /// Gets the current position of this gem in world space.
@@ -64,9 +63,10 @@ namespace Platformer2D
         /// <summary>
         /// Constructs a new gem.
         /// </summary>
-        public Gem(Level level, Vector2 position)
+        public Gem(IMgTexture2DLoader textures, SoundDevice effects, Vector2 position)
         {
-            this.level = level;
+            mTextures = textures;
+            mEffects = effects;
             this.basePosition = position;
 
             LoadContent();
@@ -77,9 +77,9 @@ namespace Platformer2D
         /// </summary>
         public void LoadContent()
         {
-            texture = Level.Content.Load<ITexture2D>("Sprites/Gem");
+            texture = mTextures.Load(new AssetIdentifier { AssetId = 6000U} ); // "Sprites/Gem"
             origin = new Vector2(texture.Width / 2.0f, texture.Height / 2.0f);
-            collectedSound = Level.Content.Load<SoundEffect>("Sounds/GemCollected");
+            collectedSound = mEffects.Load(new AssetIdentifier { AssetId = 6001U }); // "Sounds/GemCollected"
         }
 
         /// <summary>
@@ -107,13 +107,13 @@ namespace Platformer2D
         /// </param>
         public void OnCollected(Player collectedBy)
         {
-            collectedSound.Play();
+            mEffects.Play(collectedSound);
         }
 
         /// <summary>
         /// Draws a gem in the appropriate color.
         /// </summary>
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, IMgSpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, Position, null, Color, 0.0f, origin, 1.0f, SpriteEffects.None, 0.0f);
         }

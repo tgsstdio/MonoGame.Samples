@@ -13,6 +13,8 @@ using MonoGame.Core;
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Graphics;
+using MonoGame.Content;
 
 namespace Platformer2D
 {
@@ -84,12 +86,14 @@ namespace Platformer2D
         /// The speed at which this enemy moves along the X axis.
         /// </summary>
         private const float MoveSpeed = 64.0f;
+        private IMgTexture2DLoader mTextures;
 
         /// <summary>
         /// Constructs a new Enemy.
         /// </summary>
-        public Enemy(Level level, Vector2 position, string spriteSet)
+        public Enemy(IMgTexture2DLoader textures, Level level, Vector2 position, string spriteSet)
         {
+            mTextures = textures;
             this.level = level;
             this.position = position;
 
@@ -103,8 +107,10 @@ namespace Platformer2D
         {
             // Load animations.
             spriteSet = "Sprites/" + spriteSet + "/";
-            runAnimation = new Animation(Level.Content.Load<Texture2D>(spriteSet + "Run"), 0.1f, true);
-            idleAnimation = new Animation(Level.Content.Load<Texture2D>(spriteSet + "Idle"), 0.15f, true);
+
+            runAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 2000U }), 0.1f, true); // spriteSet + "Run"
+
+            idleAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 2001U }), 0.15f, true); // spriteSet + "Idle"
             sprite.PlayAnimation(idleAnimation);
 
             // Calculate bounds within texture size.
@@ -158,7 +164,7 @@ namespace Platformer2D
         /// <summary>
         /// Draws the animated enemy.
         /// </summary>
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, IMgSpriteBatch spriteBatch)
         {
             // Stop running when the game is paused or before turning around.
             if (!Level.Player.IsAlive ||

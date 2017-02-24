@@ -18,6 +18,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using System.IO;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Graphics;
+using MonoGame.Content;
 
 namespace Platformer2D
 {
@@ -30,7 +32,7 @@ namespace Platformer2D
     {
         // Physical structure of the level.
         private Tile[,] tiles;
-		private ITexture2D[] layers;
+		private IMgTexture2D[] layers;
         // The layer which entities are drawn on top of.
         private const int EntityLayer = 2;
 
@@ -72,14 +74,10 @@ namespace Platformer2D
 
         private const int PointsPerSecond = 5;
 
-        // Level content.        
-        public IContentManager Content
-        {
-            get { return content; }
-        }
-        IContentManager content;
 
         private SoundEffect exitReachedSound;
+        private IMgTexture2DLoader mTextures;
+        private SoundDevice mEffects;
 
         #region Loading
 
@@ -92,10 +90,12 @@ namespace Platformer2D
         /// <param name="fileStream">
         /// A stream containing the tile data.
         /// </param>
-        public Level(IServiceProvider serviceProvider, Stream fileStream, int levelIndex)
+        public Level(IMgTexture2DLoader textures, SoundDevice effects, Stream fileStream, int levelIndex)
         {
             // Create a new content manager to load content used just by this level.
-            content = new ContentManager(serviceProvider, "Content");
+            //content = new ContentManager(serviceProvider, "Content");
+            mTextures = textures;
+            mEffects = effects;
 
             timeRemaining = TimeSpan.FromMinutes(2.0);
 
@@ -103,16 +103,17 @@ namespace Platformer2D
 
             // Load background layer textures. For now, all levels must
             // use the same backgrounds and only use the left-most part of them.
-            layers = new ITexture2D[3];
+            layers = new IMgTexture2D[3];
             for (int i = 0; i < layers.Length; ++i)
             {
                 // Choose a random segment if each background layer for level variety.
                 int segmentIndex = levelIndex;
-				layers[i] = Content.Load<ITexture2D>("Backgrounds/Layer" + i + "_" + segmentIndex);
+                // "Backgrounds/Layer" + i + "_" + segmentIndex
+                layers[i] = mTextures.Load(new AssetIdentifier { AssetId = (uint) ((1000 * i) + segmentIndex) });
             }
 
             // Load sounds.
-            exitReachedSound = Content.Load<SoundEffect>("Sounds/ExitReached");
+            exitReachedSound = mEffects.Load(new AssetIdentifier { AssetId = 400U }); // "Sounds/ExitReached"
         }
 
         /// <summary>
@@ -195,7 +196,10 @@ namespace Platformer2D
 
                 // Floating platform
                 case '-':
-                    return LoadTile("Platform", TileCollision.Platform);
+                    {
+                        var platform = new AssetIdentifier { AssetId = 1000U }; // "Platform"
+                        return LoadTile(platform, TileCollision.Platform);
+                    }
 
                 // Various enemies
                 case 'A':
@@ -209,11 +213,17 @@ namespace Platformer2D
 
                 // Platform block
                 case '~':
-                    return LoadVarietyTile("BlockB", 2, TileCollision.Platform);
+                    {
+                        var blockB = new AssetIdentifier { AssetId = 4000U }; // "BlockB"
+                        return LoadVarietyTile(blockB, 2, TileCollision.Platform);
+                    }
 
                 // Passable block
                 case ':':
-                    return LoadVarietyTile("BlockB", 2, TileCollision.Passable);
+                    {
+                        var blockB = new AssetIdentifier { AssetId = 4000U }; // "BlockB"
+                        return LoadVarietyTile(blockB, 2, TileCollision.Passable);
+                    }
 
                 // Player 1 start point
                 case '1':
@@ -221,7 +231,10 @@ namespace Platformer2D
 
                 // Impassable block
                 case '#':
-                    return LoadVarietyTile("BlockA", 7, TileCollision.Impassable);
+                    {
+                        var blockA = new AssetIdentifier { AssetId = 8000U }; // "BlockA"
+                        return LoadVarietyTile(blockA, 7, TileCollision.Impassable);
+                    }
 
                 // Unknown tile type character
                 default:
@@ -240,9 +253,10 @@ namespace Platformer2D
         /// The tile collision type for the new tile.
         /// </param>
         /// <returns>The new tile.</returns>
-        private Tile LoadTile(string name, TileCollision collision)
+        private Tile LoadTile(AssetIdentifier name, TileCollision collision)
         {
-			return new Tile(Content.Load<ITexture2D>("Tiles/" + name), collision);
+            // ("Tiles/" + name
+            return new Tile(mTextures.Load(name), collision);
         }
 
 
@@ -256,10 +270,10 @@ namespace Platformer2D
         /// <param name="variationCount">
         /// The number of variations in this group.
         /// </param>
-        private Tile LoadVarietyTile(string baseName, int variationCount, TileCollision collision)
+        private Tile LoadVarietyTile(AssetIdentifier baseName, int variationCount, TileCollision collision)
         {
             int index = random.Next(variationCount);
-            return LoadTile(baseName + index, collision);
+            return LoadTile(new AssetIdentifier { AssetId = baseName.AssetId + (uint) index }, collision);
         }
 
 
@@ -272,7 +286,7 @@ namespace Platformer2D
                 throw new NotSupportedException("A level may only have one starting point.");
 
             start = RectangleExtensions.GetBottomCenter(GetBounds(x, y));
-            player = new Player(this, start);
+            player = new Player(mTextures, mEffects, this, start);
 
             return new Tile(null, TileCollision.Passable);
         }
@@ -287,7 +301,8 @@ namespace Platformer2D
 
             exit = GetBounds(x, y).Center;
 
-            return LoadTile("Exit", TileCollision.Passable);
+            var exitCategory = new AssetIdentifier { AssetId = 12000U }; // "Exit"
+            return LoadTile(exitCategory, TileCollision.Passable);
         }
 
         /// <summary>
@@ -296,7 +311,7 @@ namespace Platformer2D
         private Tile LoadEnemyTile(int x, int y, string spriteSet)
         {
             Vector2 position = RectangleExtensions.GetBottomCenter(GetBounds(x, y));
-            enemies.Add(new Enemy(this, position, spriteSet));
+            enemies.Add(new Enemy(mTextures, this, position, spriteSet));
 
             return new Tile(null, TileCollision.Passable);
         }
@@ -307,7 +322,7 @@ namespace Platformer2D
         private Tile LoadGemTile(int x, int y)
         {
             Point position = GetBounds(x, y).Center;
-            gems.Add(new Gem(this, new Vector2(position.X, position.Y)));
+            gems.Add(new Gem(mTextures, mEffects, new Vector2(position.X, position.Y)));
 
             return new Tile(null, TileCollision.Passable);
         }
@@ -317,7 +332,7 @@ namespace Platformer2D
         /// </summary>
         public void Dispose()
         {
-            Content.Unload();
+            //Content.Unload();
         }
 
         #endregion
@@ -489,7 +504,7 @@ namespace Platformer2D
         private void OnExitReached()
         {
             Player.OnReachedExit();
-            exitReachedSound.Play();
+            mEffects.Play(exitReachedSound);
             reachedExit = true;
         }
 
@@ -508,7 +523,7 @@ namespace Platformer2D
         /// <summary>
         /// Draw everything in the level from background to foreground.
         /// </summary>
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, IMgSpriteBatch spriteBatch)
         {
             for (int i = 0; i <= EntityLayer; ++i)
                 spriteBatch.Draw(layers[i], Vector2.Zero, Color.White);
@@ -530,7 +545,7 @@ namespace Platformer2D
         /// <summary>
         /// Draws each tile in the level.
         /// </summary>
-        private void DrawTiles(SpriteBatch spriteBatch)
+        private void DrawTiles(IMgSpriteBatch spriteBatch)
         {
             // For each tile position
             for (int y = 0; y < Height; ++y)
@@ -538,7 +553,7 @@ namespace Platformer2D
                 for (int x = 0; x < Width; ++x)
                 {
                     // If there is a visible tile in that position
-					ITexture2D texture = tiles[x, y].Texture;
+					IMgTexture2D texture = tiles[x, y].Texture;
                     if (texture != null)
                     {
                         // Draw it in screen space.

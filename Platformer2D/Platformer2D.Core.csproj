@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Platformer2DGame</RootNamespace>
     <AssemblyName>Platformer2D-Game</AssemblyName>
-    <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,6 +30,8 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Game\IMgSpriteBatch.cs" />
+    <Compile Include="ISoundEffectReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Game\Accelerometer.cs" />
     <Compile Include="Game\Animation.cs" />
@@ -44,12 +46,35 @@
     <Compile Include="Game\TouchCollectionExtensions.cs" />
     <Compile Include="Game\VirtualGamePad.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="SongDevice.cs" />
+    <Compile Include="SoundDevice.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MonoGame.Content.Audio\MonoGame.Content.Audio.csproj">
+      <Project>{b3940037-e18f-45a1-bc33-7b9325bf230a}</Project>
+      <Name>MonoGame.Content.Audio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MonoGame.Content\MonoGame.Content.csproj">
+      <Project>{e44e47ed-2203-4e45-85a9-c755b10ac044}</Project>
+      <Name>MonoGame.Content</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\MonoGame.Core\MonoGame.Core.csproj">
-      <Project>{699977AD-6D8C-4E0B-ADDA-554B66002D08}</Project>
+      <Project>{699977ad-6d8c-4e0b-adda-554b66002d08}</Project>
       <Name>MonoGame.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\MonoGame.Graphics\MonoGame.Graphics.csproj">
+      <Project>{52c293e3-dcc5-43be-a94f-dbe0cf44e25e}</Project>
+      <Name>MonoGame.Graphics</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Magnesium, Version=4.0.6155.29495, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Magnesium.5.0.4\lib\portable45-net45+win8+wpa81\Magnesium.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

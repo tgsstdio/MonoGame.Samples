@@ -12,6 +12,7 @@ using MonoGame.Core;
 
 using System;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Graphics;
 
 namespace Platformer2D
 {
@@ -28,11 +29,11 @@ namespace Platformer2D
         /// <summary>
         /// All frames in the animation arranged horizontally.
         /// </summary>
-		public ITexture2D Texture
+		public IMgTexture2D Texture
         {
             get { return texture; }
         }
-		ITexture2D texture;
+        IMgTexture2D texture;
 
         /// <summary>
         /// Duration of time to show each frame.
@@ -58,7 +59,7 @@ namespace Platformer2D
         /// </summary>
         public int FrameCount
         {
-            get { return Texture.Width / FrameWidth; }
+            get { return (int) Texture.Width / FrameWidth; }
         }
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace Platformer2D
         public int FrameWidth
         {
             // Assume square frames.
-            get { return Texture.Height; }
+            get { return (int) Texture.Height; }
         }
 
         /// <summary>
@@ -75,13 +76,13 @@ namespace Platformer2D
         /// </summary>
         public int FrameHeight
         {
-            get { return Texture.Height; }
+            get { return (int) Texture.Height; }
         }
 
         /// <summary>
         /// Constructors a new animation.
         /// </summary>        
-		public Animation(ITexture2D texture, float frameTime, bool isLooping)
+		public Animation(IMgTexture2D texture, float frameTime, bool isLooping)
         {
             this.texture = texture;
             this.frameTime = frameTime;

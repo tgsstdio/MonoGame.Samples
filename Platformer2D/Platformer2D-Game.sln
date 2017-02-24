@@ -1,0 +1,88 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platformer2D.Core", "Platformer2D.Core.csproj", "{A0F5018E-91D9-4A47-B89A-9E96AD98E79C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Core", "..\..\..\MonoGame.Core\MonoGame.Core.csproj", "{699977AD-6D8C-4E0B-ADDA-554B66002D08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Graphics", "..\..\..\MonoGame.Graphics\MonoGame.Graphics.csproj", "{52C293E3-DCC5-43BE-A94F-DBE0CF44E25E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Content", "..\..\..\MonoGame.Content\MonoGame.Content.csproj", "{E44E47ED-2203-4E45-85A9-C755B10AC044}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magnesium.Ktx", "..\..\..\..\Mg\Magnesium.Ktx\Magnesium.Ktx.csproj", "{6C74B420-5DE6-43ED-AB99-18AE19342284}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Audio.OpenAL", "..\..\..\MonoGame.Audio.OpenAL\MonoGame.Audio.OpenAL.csproj", "{C06188B4-0C78-42CB-B868-336EB7B6B3DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platformer2D.DesktopGL", "..\Platformer2D.DesktopGL\Platformer2D.DesktopGL.csproj", "{C21CF74B-55C5-43B6-8D4F-083E7AC78899}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Platform.DesktopGL", "..\..\..\MonoGame.Platform.DesktopGL\MonoGame.Platform.DesktopGL.csproj", "{B512C831-4562-447E-9F99-C66F86B1279F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Audio.OpenAL.DesktopGL", "..\..\..\MonoGame.Audio.OpenAL.DesktopGL\MonoGame.Audio.OpenAL.DesktopGL.csproj", "{D68E983C-FA4D-418A-8353-43C4CDE75B23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Content.Dirs", "..\..\..\MonoGame.Content.Dirs\MonoGame.Content.Dirs.csproj", "{9D3DE491-E6D0-4D12-9A2D-D31B23D7D71D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Content.Audio.OpenAL.NVorbis", "..\..\..\MonoGame.Audio.OpenAL.DesktopGL.NVorbis\MonoGame.Content.Audio.OpenAL.NVorbis.csproj", "{4067DABF-4C00-4FE6-A751-453137CD4B2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Content.Audio", "..\..\..\MonoGame.Content.Audio\MonoGame.Content.Audio.csproj", "{B3940037-E18F-45A1-BC33-7B9325BF230A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0F5018E-91D9-4A47-B89A-9E96AD98E79C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0F5018E-91D9-4A47-B89A-9E96AD98E79C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0F5018E-91D9-4A47-B89A-9E96AD98E79C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0F5018E-91D9-4A47-B89A-9E96AD98E79C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{699977AD-6D8C-4E0B-ADDA-554B66002D08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{699977AD-6D8C-4E0B-ADDA-554B66002D08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{699977AD-6D8C-4E0B-ADDA-554B66002D08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{699977AD-6D8C-4E0B-ADDA-554B66002D08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52C293E3-DCC5-43BE-A94F-DBE0CF44E25E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52C293E3-DCC5-43BE-A94F-DBE0CF44E25E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52C293E3-DCC5-43BE-A94F-DBE0CF44E25E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52C293E3-DCC5-43BE-A94F-DBE0CF44E25E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E44E47ED-2203-4E45-85A9-C755B10AC044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E44E47ED-2203-4E45-85A9-C755B10AC044}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E44E47ED-2203-4E45-85A9-C755B10AC044}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E44E47ED-2203-4E45-85A9-C755B10AC044}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C74B420-5DE6-43ED-AB99-18AE19342284}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C74B420-5DE6-43ED-AB99-18AE19342284}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C74B420-5DE6-43ED-AB99-18AE19342284}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C74B420-5DE6-43ED-AB99-18AE19342284}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C06188B4-0C78-42CB-B868-336EB7B6B3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C06188B4-0C78-42CB-B868-336EB7B6B3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C06188B4-0C78-42CB-B868-336EB7B6B3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C06188B4-0C78-42CB-B868-336EB7B6B3DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C21CF74B-55C5-43B6-8D4F-083E7AC78899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C21CF74B-55C5-43B6-8D4F-083E7AC78899}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C21CF74B-55C5-43B6-8D4F-083E7AC78899}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C21CF74B-55C5-43B6-8D4F-083E7AC78899}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B512C831-4562-447E-9F99-C66F86B1279F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B512C831-4562-447E-9F99-C66F86B1279F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B512C831-4562-447E-9F99-C66F86B1279F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B512C831-4562-447E-9F99-C66F86B1279F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D68E983C-FA4D-418A-8353-43C4CDE75B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D68E983C-FA4D-418A-8353-43C4CDE75B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D68E983C-FA4D-418A-8353-43C4CDE75B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D68E983C-FA4D-418A-8353-43C4CDE75B23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D3DE491-E6D0-4D12-9A2D-D31B23D7D71D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D3DE491-E6D0-4D12-9A2D-D31B23D7D71D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D3DE491-E6D0-4D12-9A2D-D31B23D7D71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D3DE491-E6D0-4D12-9A2D-D31B23D7D71D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4067DABF-4C00-4FE6-A751-453137CD4B2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4067DABF-4C00-4FE6-A751-453137CD4B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4067DABF-4C00-4FE6-A751-453137CD4B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4067DABF-4C00-4FE6-A751-453137CD4B2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3940037-E18F-45A1-BC33-7B9325BF230A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3940037-E18F-45A1-BC33-7B9325BF230A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3940037-E18F-45A1-BC33-7B9325BF230A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3940037-E18F-45A1-BC33-7B9325BF230A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
