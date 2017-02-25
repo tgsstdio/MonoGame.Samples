@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Content.Audio.Open
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Content.Audio", "..\..\..\MonoGame.Content.Audio\MonoGame.Content.Audio.csproj", "{B3940037-E18F-45A1-BC33-7B9325BF230A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Textures.FreeImageNET", "..\..\..\MonoGame.Textures.FreeImageNET\MonoGame.Textures.FreeImageNET.csproj", "{EEC1E6BC-AF82-413A-BA6A-7E80C032BCFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{B3940037-E18F-45A1-BC33-7B9325BF230A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3940037-E18F-45A1-BC33-7B9325BF230A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3940037-E18F-45A1-BC33-7B9325BF230A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEC1E6BC-AF82-413A-BA6A-7E80C032BCFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC1E6BC-AF82-413A-BA6A-7E80C032BCFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC1E6BC-AF82-413A-BA6A-7E80C032BCFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEC1E6BC-AF82-413A-BA6A-7E80C032BCFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

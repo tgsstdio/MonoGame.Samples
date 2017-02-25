@@ -46,7 +46,7 @@ namespace Platformer2D
     /// </summary>
     struct Tile
     {
-		public IMgTexture2D Texture;
+		public IMgTexture Texture;
         public TileCollision Collision;
 
         public const int Width = 40;
@@ -57,7 +57,7 @@ namespace Platformer2D
         /// <summary>
         /// Constructs a new tile.
         /// </summary>
-		public Tile(IMgTexture2D texture, TileCollision collision)
+		public Tile(IMgTexture texture, TileCollision collision)
         {
             Texture = texture;
             Collision = collision;

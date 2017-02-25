@@ -32,7 +32,7 @@ namespace Platformer2D
     {
         // Physical structure of the level.
         private Tile[,] tiles;
-		private IMgTexture2D[] layers;
+		private IMgTexture[] layers;
         // The layer which entities are drawn on top of.
         private const int EntityLayer = 2;
 
@@ -76,7 +76,7 @@ namespace Platformer2D
 
 
         private SoundEffect exitReachedSound;
-        private IMgTexture2DLoader mTextures;
+        private IMgTextureLoader mTextures;
         private SoundDevice mEffects;
 
         #region Loading
@@ -90,7 +90,7 @@ namespace Platformer2D
         /// <param name="fileStream">
         /// A stream containing the tile data.
         /// </param>
-        public Level(IMgTexture2DLoader textures, SoundDevice effects, Stream fileStream, int levelIndex)
+        public Level(IMgTextureLoader textures, SoundDevice effects, Stream fileStream, int levelIndex)
         {
             // Create a new content manager to load content used just by this level.
             //content = new ContentManager(serviceProvider, "Content");
@@ -103,7 +103,7 @@ namespace Platformer2D
 
             // Load background layer textures. For now, all levels must
             // use the same backgrounds and only use the left-most part of them.
-            layers = new IMgTexture2D[3];
+            layers = new IMgTexture[3];
             for (int i = 0; i < layers.Length; ++i)
             {
                 // Choose a random segment if each background layer for level variety.
@@ -553,7 +553,7 @@ namespace Platformer2D
                 for (int x = 0; x < Width; ++x)
                 {
                     // If there is a visible tile in that position
-					IMgTexture2D texture = tiles[x, y].Texture;
+					IMgTexture texture = tiles[x, y].Texture;
                     if (texture != null)
                     {
                         // Draw it in screen space.

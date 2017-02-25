@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultMediaPlayer.cs" />
     <Compile Include="DefaultSoundEffectReader.cs" />
     <Compile Include="NullGamepadPlatform.cs" />
     <Compile Include="NullTouchListener.cs" />
@@ -72,10 +73,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="FreeImage.lib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MonoGame.Audio.OpenAL.DesktopGL.NVorbis\MonoGame.Content.Audio.OpenAL.NVorbis.csproj">
+      <Project>{4067dabf-4c00-4fe6-a751-453137cd4b2a}</Project>
+      <Name>MonoGame.Content.Audio.OpenAL.NVorbis</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\MonoGame.Audio.OpenAL.DesktopGL\MonoGame.Audio.OpenAL.DesktopGL.csproj">
       <Project>{d68e983c-fa4d-418a-8353-43c4cde75b23}</Project>
       <Name>MonoGame.Audio.OpenAL.DesktopGL</Name>
@@ -83,6 +91,10 @@
     <ProjectReference Include="..\..\..\MonoGame.Audio.OpenAL\MonoGame.Audio.OpenAL.csproj">
       <Project>{c06188b4-0c78-42cb-b868-336eb7b6b3df}</Project>
       <Name>MonoGame.Audio.OpenAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MonoGame.Content.Audio\MonoGame.Content.Audio.csproj">
+      <Project>{b3940037-e18f-45a1-bc33-7b9325bf230a}</Project>
+      <Name>MonoGame.Content.Audio</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MonoGame.Content.Dirs\MonoGame.Content.Dirs.csproj">
       <Project>{9d3de491-e6d0-4d12-9a2d-d31b23d7d71d}</Project>
@@ -104,10 +116,22 @@
       <Project>{b512c831-4562-447e-9f99-c66f86b1279f}</Project>
       <Name>MonoGame.Platform.DesktopGL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\MonoGame.Textures.FreeImageNET\MonoGame.Textures.FreeImageNET.csproj">
+      <Project>{eec1e6bc-af82-413a-ba6a-7e80c032bcfd}</Project>
+      <Name>MonoGame.Textures.FreeImageNET</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Platformer2D\Platformer2D.Core.csproj">
       <Project>{a0f5018e-91d9-4a47-b89a-9e96ad98e79c}</Project>
       <Name>Platformer2D.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FreeImage.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\80000000\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

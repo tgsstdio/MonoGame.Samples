@@ -20,10 +20,14 @@ namespace Platformer2D.DesktopGL
                     container.Register<Microsoft.Xna.Framework.Game, Platformer2D.PlatformerGame>(Reuse.InCurrentScope);
                     container.Register<Microsoft.Xna.Framework.Input.Touch.ITouchListener, NullTouchListener>(Reuse.Singleton);
                     container.Register<Microsoft.Xna.Framework.Input.IGamepadPlatform, NullGamepadPlatform>(Reuse.Singleton);
-                    container.Register<Platformer2D.ISoundEffectReader, DefaultSoundEffectReader>(Reuse.InCurrentScope);
                     container.Register<Platformer2D.SoundDevice>(Reuse.InCurrentScope);
+                    container.Register<Platformer2D.ISoundEffectReader, DefaultSoundEffectReader>(Reuse.InCurrentScope);
                     container.Register<Platformer2D.SongDevice>(Reuse.InCurrentScope);
-  
+                    container.Register<MonoGame.Content.Audio.ISongReader, MonoGame.Content.Audio.OpenAL.NVorbis.NVorbisSongReader>(Reuse.InCurrentScope);
+                    container.Register<Microsoft.Xna.Framework.Media.IMediaPlayer, DefaultMediaPlayer>(Reuse.InCurrentScope);
+                    container.Register<Microsoft.Xna.Framework.Media.IMediaQueue, Microsoft.Xna.Framework.Media.DefaultMediaQueue>(Reuse.InCurrentScope);
+                    container.Register<Microsoft.Xna.Framework.Audio.ISoundPlayer, Microsoft.Xna.Framework.Audio.SoundPlayer>(Reuse.InCurrentScope);
+                    container.Register<Microsoft.Xna.Framework.Audio.ISoundEffectImplementation, MonoGame.Audio.OpenAL.DesktopGL.DesktopGLSoundEffectImplementation>(Reuse.InCurrentScope);
 
                     // Magnesium IN SCOPE RESOLUTION
                     container.Register<Magnesium.IMgPresentationLayer, Magnesium.MgPresentationLayer>(Reuse.InCurrentScope);
@@ -78,7 +82,7 @@ namespace Platformer2D.DesktopGL
                     container.Register<Microsoft.Xna.Framework.IGraphicsDeviceQuery, MonoGame.Core.DefaultGraphicsDeviceQuery>(Reuse.Singleton);
 
                     // MAGNESIUM TEXTURES 
-                    //container.Register<MonoGame.Graphics.IMgBaseTextureLoader, MonoGame.Textures.FreeImageNET.FITexture2DLoader>(Reuse.Singleton);
+                    container.Register<MonoGame.Graphics.IMgTextureLoader, MonoGame.Textures.FreeImageNET.FITexture2DLoader>(Reuse.Singleton);
                     container.Register<MonoGame.Content.IContentStreamer, MonoGame.Content.ContentStreamer>(Reuse.Singleton);
                     container.Register<MonoGame.Content.IBlockLocator, MonoGame.Content.MaskedBlockLocator>(Reuse.Singleton);
                     container.Register<MonoGame.Content.IFileSystem, MonoGame.Content.Dirs.DirectoryFileSystem>(Reuse.Singleton);

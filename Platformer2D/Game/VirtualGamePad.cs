@@ -12,12 +12,12 @@ namespace Platformer2D
     {
         private readonly Vector2 baseScreenSize;
         private Matrix globalTransformation;
-		private readonly IMgTexture2D texture;
+		private readonly IMgTexture texture;
 
         private float secondsSinceLastInput;
         private float opacity;
 
-		public VirtualGamePad(Vector2 baseScreenSize, Matrix globalTransformation, IMgTexture2D texture)
+		public VirtualGamePad(Vector2 baseScreenSize, Matrix globalTransformation, IMgTexture texture)
         {
             this.baseScreenSize = baseScreenSize;
             this.globalTransformation = Matrix.Invert(globalTransformation);

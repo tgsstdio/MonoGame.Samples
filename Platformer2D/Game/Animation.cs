@@ -29,11 +29,11 @@ namespace Platformer2D
         /// <summary>
         /// All frames in the animation arranged horizontally.
         /// </summary>
-		public IMgTexture2D Texture
+		public IMgTexture Texture
         {
             get { return texture; }
         }
-        IMgTexture2D texture;
+        IMgTexture texture;
 
         /// <summary>
         /// Duration of time to show each frame.
@@ -82,7 +82,7 @@ namespace Platformer2D
         /// <summary>
         /// Constructors a new animation.
         /// </summary>        
-		public Animation(IMgTexture2D texture, float frameTime, bool isLooping)
+		public Animation(IMgTexture texture, float frameTime, bool isLooping)
         {
             this.texture = texture;
             this.frameTime = frameTime;

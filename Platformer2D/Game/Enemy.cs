@@ -86,12 +86,12 @@ namespace Platformer2D
         /// The speed at which this enemy moves along the X axis.
         /// </summary>
         private const float MoveSpeed = 64.0f;
-        private IMgTexture2DLoader mTextures;
+        private IMgTextureLoader mTextures;
 
         /// <summary>
         /// Constructs a new Enemy.
         /// </summary>
-        public Enemy(IMgTexture2DLoader textures, Level level, Vector2 position, string spriteSet)
+        public Enemy(IMgTextureLoader textures, Level level, Vector2 position, string spriteSet)
         {
             mTextures = textures;
             this.level = level;

@@ -106,7 +106,7 @@ namespace Platformer2D
         private float jumpTime;
 
         private Rectangle localBounds;
-        private IMgTexture2DLoader mTextures;
+        private IMgTextureLoader mTextures;
         private SoundDevice mEffects;
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Platformer2D
         /// <summary>
         /// Constructors a new player.
         /// </summary>
-        public Player(IMgTexture2DLoader textures, SoundDevice effects, Level level, Vector2 position)
+        public Player(IMgTextureLoader textures, SoundDevice effects, Level level, Vector2 position)
         {
             this.mTextures = textures;
             this.mEffects = effects;

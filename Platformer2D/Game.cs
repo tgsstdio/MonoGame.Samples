@@ -38,9 +38,9 @@ namespace Platformer2D
         // Global content.
         private SpriteFont hudFont;
 
-        private IMgTexture2D winOverlay;
-        private IMgTexture2D loseOverlay;
-        private IMgTexture2D diedOverlay;
+        private IMgTexture winOverlay;
+        private IMgTexture loseOverlay;
+        private IMgTexture diedOverlay;
 
         // Meta-level game state.
         private int levelIndex = -1;
@@ -70,8 +70,7 @@ namespace Platformer2D
         private GamePad mGamepad;
         private ITitleContainer mTitleContainer;
         private IGamePlatform mGamePlatform;
-        private IMgTexture2DLoader mTextures;
-        private IMediaPlayer mMediaPlayer;
+        private IMgTextureLoader mTextures;
         private IMgGraphicsConfiguration mGraphicsConfiguration;
         private IPresentationParameters mPresentationParameters;
         private IMgSwapchainCollection mSwapchain;
@@ -92,7 +91,7 @@ namespace Platformer2D
             IGamepadPlatform gamepadPlatform,
             ITitleContainer titleContainer,
             IGamePlatform gamePlatform,
-            IMgTexture2DLoader textures,
+            IMgTextureLoader textures,
             //IMediaPlayer mediaPlayer,
             //ISongReader songs,
             SongDevice songs,
@@ -110,7 +109,6 @@ namespace Platformer2D
             mTitleContainer = titleContainer;
             mGamePlatform = gamePlatform;
             mTextures = textures;
-            //mMediaPlayer = mediaPlayer;
             mSongs = songs;
             mEffects = effects;     
 
@@ -118,6 +116,7 @@ namespace Platformer2D
             var height = (uint)mPresentationParameters.BackBufferHeight;
 
             mGraphicsConfiguration.Initialize(width, height);
+            mTextures.Initialize();
 
            // Content.RootDirectory = "Content";
 
@@ -278,7 +277,8 @@ namespace Platformer2D
 
         private void DrawHud()
         {
-            Rectangle titleSafeArea = mManager.Viewport.TitleSafeArea;
+            var vp = mManager.Device.CurrentViewport;
+            Rectangle titleSafeArea = new Rectangle((int) vp.X, (int) vp.Y, (int) vp.Width, (int) vp.Height);
             Vector2 hudLocation = new Vector2(titleSafeArea.X, titleSafeArea.Y);
             //Vector2 center = new Vector2(titleSafeArea.X + titleSafeArea.Width / 2.0f,
             //                             titleSafeArea.Y + titleSafeArea.Height / 2.0f);
@@ -306,7 +306,7 @@ namespace Platformer2D
             DrawShadowedString(hudFont, "SCORE: " + level.Score.ToString(), hudLocation + new Vector2(0.0f, timeHeight * 1.2f), Color.Yellow);
            
             // Determine the status overlay message to show.
-            IMgTexture2D status = null;
+            IMgTexture status = null;
             if (level.TimeRemaining == TimeSpan.Zero)
             {
                 if (level.ReachedExit)

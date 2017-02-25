@@ -24,7 +24,7 @@ namespace Platformer2D
     /// </summary>
     class Gem
     {
-        private IMgTexture2D texture;
+        private IMgTexture texture;
         private Vector2 origin;
         private SoundEffect collectedSound;
 
@@ -35,7 +35,7 @@ namespace Platformer2D
         private Vector2 basePosition;
         private float bounce;
 
-        private IMgTexture2DLoader mTextures;
+        private IMgTextureLoader mTextures;
         private SoundDevice mEffects;
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Platformer2D
         /// <summary>
         /// Constructs a new gem.
         /// </summary>
-        public Gem(IMgTexture2DLoader textures, SoundDevice effects, Vector2 position)
+        public Gem(IMgTextureLoader textures, SoundDevice effects, Vector2 position)
         {
             mTextures = textures;
             mEffects = effects;
