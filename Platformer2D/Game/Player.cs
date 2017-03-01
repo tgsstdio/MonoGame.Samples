@@ -144,15 +144,15 @@ namespace Platformer2D
         {
             // Load animated textures.
             // "Sprites/Player/Idle"
-            idleAnimation = new Animation(mTextures.Load( new AssetIdentifier { AssetId = 100U}), 0.1f, true);
+            idleAnimation = new Animation(mTextures.Load( new AssetIdentifier { AssetId = 0xc0000000 }), 0.1f, true);
             // "Sprites/Player/Run"
-            runAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 101U }), 0.1f, true);
+            runAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 0xc0000001 }), 0.1f, true);
             // "Sprites/Player/Jump"
-            jumpAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 102U }), 0.1f, false);
+            jumpAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 0xc0000002 }), 0.1f, false);
             // "Sprites/Player/Celebrate"
-            celebrateAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 103U }), 0.1f, false);
+            celebrateAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 0xc0000003 }), 0.1f, false);
             // "Sprites/Player/Die"
-            dieAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 104U }), 0.1f, false);
+            dieAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 0xc0000004 }), 0.1f, false);
 
             // Calculate bounds within texture size.            
             int width = (int)(idleAnimation.FrameWidth * 0.4);
@@ -162,9 +162,9 @@ namespace Platformer2D
             localBounds = new Rectangle(left, top, width, height);
 
             // Load sounds.            
-            killedSound = mEffects.Load(new AssetIdentifier { AssetId = 9000U }); // "Sounds/PlayerKilled"
-            jumpSound = mEffects.Load(new AssetIdentifier { AssetId = 9001U }); // "Sounds/PlayerJump"
-            fallSound = mEffects.Load(new AssetIdentifier { AssetId = 9002U }); // "Sounds/PlayerFall"
+            killedSound = mEffects.Load(new AssetIdentifier { AssetId = 0x50000001 }); // "Sounds/PlayerKilled"
+            jumpSound = mEffects.Load(new AssetIdentifier { AssetId = 0x50000002 }); // "Sounds/PlayerJump"
+            fallSound = mEffects.Load(new AssetIdentifier { AssetId = 0x50000003 }); // "Sounds/PlayerFall"
         }
 
         /// <summary>

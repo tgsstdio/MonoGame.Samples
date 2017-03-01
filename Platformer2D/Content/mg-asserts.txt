@@ -1,0 +1,78 @@
+
+folder 0 => 0x	00000000
+1	00000000	spritebatch	vert	
+1	0000000a	spritebatch	frag	10
+1	00000010	spritebatch	frag	16
+1	00000020	spritebatch	frag	32
+
+folder 1 => 0x	80000000
+10	80000000	level0	Levels/0.txt
+10	80000001	level1	Levels/1.txt
+10	80000002	level2	Levels/2.txt
+
+folder 2 => 0x	40000000
+2	40000000	winOverlay	Overlays/you_win.png
+2	40000001	loseOverlay	Overlays/you_lose.png
+2	40000002	diedOverlay	Overlays/you_died.png	
+
+folder 3 => 0x	c0000000	
+3	c0000000	idleAnimation	Sprites/Player/Idle.png	
+3	c0000001	runAnimation	Sprites/Player/Run.png
+3	c0000002	jumpAnimation	Sprites/Player/Jump.png	
+3	c0000003	celebrateAnimation	Sprites/Player/Celebrate.png
+3	c0000004	dieAnimation	Sprites/Player/Die.png
+
+folder 4 => 0x	20000000	
+4	20000000	virtualGamePad	Sprites/VirtualControlArrow.png
+4	20000001	gem	Sprites/Gem.png
+
+folder 5 => 0x	a0000000
+5	a0000000	idleAnimation	Sprites/MonsterA/Idle.png
+5	a0000001	runAnimation	Sprites/MonsterA/Run.png
+
+folder 6 => 0x	60000000
+6	60000000	idleAnimation	Sprites/MonsterB/Idle.png
+6	60000001	runAnimation	Sprites/MonsterB/Run.png	
+
+folder 7 => 0x	e0000000
+7	e0000000	idleAnimation	Sprites/MonsterC/Idle.png	
+7	e0000001	runAnimation	Sprites/MonsterC/Run.png	
+
+folder 8 => 0x	10000000
+8	10000000	idleAnimation	Sprites/MonsterD/Idle.png	
+8	10000001	runAnimation	Sprites/MonsterD/Run.png	
+
+folder 9 => 0x	90000000
+9	90000000	BlockA0	Tiles/BlockA0.png
+9	90000001	BlockA1	Tiles/BlockA1.png
+9	90000002	BlockA2	Tiles/BlockA2.png
+9	90000003	BlockA3	Tiles/BlockA3.png
+9	90000004	BlockA4	Tiles/BlockA4.png
+9	90000005	BlockA5	Tiles/BlockA5.png
+9	90000006	BlockA6	Tiles/BlockA6.png
+9	90000010	BlockB0	Tiles/BlockB0.png
+9	90000011	BlockB1	Tiles/BlockB1.png
+9	90000020	Exit	Tiles/Exit.png
+9	90000030	Platform	Tiles/Platform.png
+
+folder 10 => 0x	50000000
+10	50000000	music	Sounds/Music.wma
+10	50000001	killedSound	Sounds/PlayerKilled.wav
+10	50000002	jumpSound	Sounds/PlayerJump.wav
+10	50000003	fallSound	Sounds/PlayerFall.wav
+10	50000004	collectedSound	Sounds/GemCollected.wav
+10	50000005	exitReachedSound	Sounds/ExitReached.wav
+
+folder 11 => 0x	d0000000
+11	d0000000	Layer0_0	Backgrounds/Layer0_0.png
+11	d0000001	Layer1_0	Backgrounds/Layer1_0.png
+11	d0000002	Layer2_0	Backgrounds/Layer2_0.png
+
+11	d0000003	Layer0_1	Backgrounds/Layer0_1.png
+11	d0000004	Layer1_1	Backgrounds/Layer1_1.png
+11	d0000005	Layer2_1	Backgrounds/Layer2_1.png
+
+11	d0000006	Layer0_2	Backgrounds/Layer0_2.png
+11	d0000007	Layer1_2	Backgrounds/Layer1_2.png
+11	d0000008	Layer2_2	Backgrounds/Layer2_2.png
+

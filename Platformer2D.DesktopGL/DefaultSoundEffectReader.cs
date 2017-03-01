@@ -1,9 +1,10 @@
 ﻿using Microsoft.Xna.Framework.Audio;
+using MonoGame.Core.Audio;
 using System.IO;
 
 namespace Platformer2D.DesktopGL
 {
-    internal class DefaultSoundEffectReader : ISoundEffectReader
+    public class DefaultSoundEffectReader : ISoundEffectReader
     {
         private ISoundEffectImplementation mPlatform;
         public DefaultSoundEffectReader(ISoundEffectImplementation platform)

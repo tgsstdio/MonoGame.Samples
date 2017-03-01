@@ -21,7 +21,7 @@ namespace Platformer2D.DesktopGL
                     container.Register<Microsoft.Xna.Framework.Input.Touch.ITouchListener, NullTouchListener>(Reuse.Singleton);
                     container.Register<Microsoft.Xna.Framework.Input.IGamepadPlatform, NullGamepadPlatform>(Reuse.Singleton);
                     container.Register<Platformer2D.SoundDevice>(Reuse.InCurrentScope);
-                    container.Register<Platformer2D.ISoundEffectReader, DefaultSoundEffectReader>(Reuse.InCurrentScope);
+                    container.Register<MonoGame.Core.Audio.ISoundEffectReader, MonoGame.Audio.OpenAL.DesktopGL.DesktopGLWAVReader>(Reuse.InCurrentScope);
                     container.Register<Platformer2D.SongDevice>(Reuse.InCurrentScope);
                     container.Register<MonoGame.Content.Audio.ISongReader, MonoGame.Content.Audio.OpenAL.NVorbis.NVorbisSongReader>(Reuse.InCurrentScope);
                     container.Register<Microsoft.Xna.Framework.Media.IMediaPlayer, DefaultMediaPlayer>(Reuse.InCurrentScope);

@@ -10,9 +10,10 @@ namespace Platformer2D.DesktopGL
             throw new NotImplementedException();
         }
 
+        private GamePadState mNullState = new GamePadState();
         public GamePadState GetState(int index, GamePadDeadZone deadZoneMode)
         {
-            throw new NotImplementedException();
+            return mNullState;
         }
 
         public bool SetVibration(int index, float leftMotor, float rightMotor)

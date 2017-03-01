@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Audio;
 using MonoGame.Content;
+using MonoGame.Core.Audio;
 using System.IO;
 
 namespace Platformer2D

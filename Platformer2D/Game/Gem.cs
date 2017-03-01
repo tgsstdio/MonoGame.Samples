@@ -77,9 +77,9 @@ namespace Platformer2D
         /// </summary>
         public void LoadContent()
         {
-            texture = mTextures.Load(new AssetIdentifier { AssetId = 6000U} ); // "Sprites/Gem"
+            texture = mTextures.Load(new AssetIdentifier { AssetId = 0x20000001 } ); // "Sprites/Gem"
             origin = new Vector2(texture.Width / 2.0f, texture.Height / 2.0f);
-            collectedSound = mEffects.Load(new AssetIdentifier { AssetId = 6001U }); // "Sounds/GemCollected"
+            collectedSound = mEffects.Load(new AssetIdentifier { AssetId = 0x50000004 }); // "Sounds/GemCollected"
         }
 
         /// <summary>

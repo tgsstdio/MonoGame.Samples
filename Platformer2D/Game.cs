@@ -68,7 +68,7 @@ namespace Platformer2D
         private IKeyboardInputListener mKeyboard;
         private ITouchListener mTouch;
         private GamePad mGamepad;
-        private ITitleContainer mTitleContainer;
+        private IContentStreamer mContentStreamer;
         private IGamePlatform mGamePlatform;
         private IMgTextureLoader mTextures;
         private IMgGraphicsConfiguration mGraphicsConfiguration;
@@ -89,7 +89,7 @@ namespace Platformer2D
             IKeyboardInputListener keyboard,
             ITouchListener touch,
             IGamepadPlatform gamepadPlatform,
-            ITitleContainer titleContainer,
+            IContentStreamer contentStreamer,
             IGamePlatform gamePlatform,
             IMgTextureLoader textures,
             //IMediaPlayer mediaPlayer,
@@ -106,7 +106,7 @@ namespace Platformer2D
             mKeyboard = keyboard;
             mTouch = touch;
             mGamepad = new GamePad(gamepadPlatform);
-            mTitleContainer = titleContainer;
+            mContentStreamer = contentStreamer;
             mGamePlatform = gamePlatform;
             mTextures = textures;
             mSongs = songs;
@@ -145,9 +145,9 @@ namespace Platformer2D
            // TODO : hudFont = Content.Load<SpriteFont>("Fonts/Hud");
 
             // Load overlay textures
-            winOverlay =    mTextures.Load(new AssetIdentifier { AssetId = 0U }); // "Overlays/you_win"
-            loseOverlay =   mTextures.Load(new AssetIdentifier { AssetId = 1U }); // "Overlays/you_lose"
-            diedOverlay =   mTextures.Load(new AssetIdentifier { AssetId = 2U }); // "Overlays/you_died"
+            winOverlay =    mTextures.Load(new AssetIdentifier { AssetId = 0x40000000 }); // "Overlays/you_win"
+            loseOverlay =   mTextures.Load(new AssetIdentifier { AssetId = 0x40000001 }); // "Overlays/you_lose"
+            diedOverlay =   mTextures.Load(new AssetIdentifier { AssetId = 0x40000002 }); // "Overlays/you_died"
 
             //Work out how much we need to scale our graphics to fill the screen
             float horScaling = mPresentationParameters.BackBufferWidth / baseScreenSize.X;
@@ -155,7 +155,7 @@ namespace Platformer2D
             Vector3 screenScalingFactor = new Vector3(horScaling, verScaling, 1);
             globalTransformation = Matrix.CreateScale(screenScalingFactor);
 
-            virtualGamePad = new VirtualGamePad(baseScreenSize, globalTransformation, mTextures.Load(new AssetIdentifier { AssetId = 0U })); // "Sprites/VirtualControlArrow"
+            virtualGamePad = new VirtualGamePad(baseScreenSize, globalTransformation, mTextures.Load(new AssetIdentifier { AssetId = 0x20000000 })); // "Sprites/VirtualControlArrow"
 
             //Known issue that you get exceptions if you use Media PLayer while connected to your PC
             //See http://social.msdn.microsoft.com/Forums/en/windowsphone7series/thread/c8a243d2-d360-46b1-96bd-62b1ef268c66
@@ -244,9 +244,29 @@ namespace Platformer2D
                 level.Dispose();
 
             // Load the level.
-            string levelPath = string.Format("Content/Levels/{0}.txt", levelIndex);
-            using (Stream fileStream = mTitleContainer.OpenStream(levelPath))
-                level = new Level(mTextures, mEffects, fileStream, levelIndex);
+            //string levelPath = string.Format("Content/Levels/{0}.txt", levelIndex);
+
+            var levelData = new[]
+            {
+                new AssetIdentifier { AssetId = 0x80000000 },
+                new AssetIdentifier { AssetId = 0x80000001 },
+                new AssetIdentifier { AssetId = 0x80000002 }
+            };
+
+            var backgroundLevels = new []
+            {
+                new AssetIdentifier { AssetId = 0xd0000000 },
+                new AssetIdentifier { AssetId = 0xd0000003 },
+                new AssetIdentifier { AssetId = 0xd0000006 }
+            };
+
+            var nextLevelId = levelData[levelIndex];
+            var nextLevelLayerId = backgroundLevels[levelIndex];
+
+            using (Stream fileStream = mContentStreamer.LoadContent(nextLevelId, new[] { ".txt" }))
+            {
+                level = new Level(mTextures, mEffects, fileStream, nextLevelLayerId);
+            }
         }
 
         private void ReloadCurrentLevel()

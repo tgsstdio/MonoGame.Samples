@@ -125,9 +125,10 @@ namespace Platformer2D.DesktopGL
             throw new NotImplementedException();
         }
 
+        private TouchCollection mEmpty = new TouchCollection();
         public TouchCollection GetState()
         {
-            throw new NotImplementedException();
+            return mEmpty;
         }
 
         public void ReleaseAllTouches()

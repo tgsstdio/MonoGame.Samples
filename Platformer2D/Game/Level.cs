@@ -90,7 +90,7 @@ namespace Platformer2D
         /// <param name="fileStream">
         /// A stream containing the tile data.
         /// </param>
-        public Level(IMgTextureLoader textures, SoundDevice effects, Stream fileStream, int levelIndex)
+        public Level(IMgTextureLoader textures, SoundDevice effects, Stream fileStream, AssetIdentifier levelIndex)
         {
             // Create a new content manager to load content used just by this level.
             //content = new ContentManager(serviceProvider, "Content");
@@ -104,16 +104,16 @@ namespace Platformer2D
             // Load background layer textures. For now, all levels must
             // use the same backgrounds and only use the left-most part of them.
             layers = new IMgTexture[3];
-            for (int i = 0; i < layers.Length; ++i)
+            for (var i = 0U; i < layers.Length; ++i)
             {
                 // Choose a random segment if each background layer for level variety.
-                int segmentIndex = levelIndex;
                 // "Backgrounds/Layer" + i + "_" + segmentIndex
-                layers[i] = mTextures.Load(new AssetIdentifier { AssetId = (uint) ((1000 * i) + segmentIndex) });
+                var segmentIndex = levelIndex.Add(i);
+                layers[i] = mTextures.Load(segmentIndex);
             }
 
             // Load sounds.
-            exitReachedSound = mEffects.Load(new AssetIdentifier { AssetId = 400U }); // "Sounds/ExitReached"
+            exitReachedSound = mEffects.Load(new AssetIdentifier { AssetId = 0x50000005 }); // "Sounds/ExitReached"
         }
 
         /// <summary>
@@ -197,31 +197,43 @@ namespace Platformer2D
                 // Floating platform
                 case '-':
                     {
-                        var platform = new AssetIdentifier { AssetId = 1000U }; // "Platform"
-                        return LoadTile(platform, TileCollision.Platform);
+                        var platformId = new AssetIdentifier { AssetId =  0x90000030 }; // "Platform"
+                        return LoadTile(platformId, TileCollision.Platform);
                     }
 
                 // Various enemies
                 case 'A':
-                    return LoadEnemyTile(x, y, "MonsterA");
+                    {
+                        var monsterA_set = new AssetIdentifier { AssetId = 0xa0000000 };
+                        return LoadEnemyTile(x, y, monsterA_set);
+                    }
                 case 'B':
-                    return LoadEnemyTile(x, y, "MonsterB");
+                    {
+                        var monsterB_set = new AssetIdentifier { AssetId = 0x60000000 };
+                        return LoadEnemyTile(x, y, monsterB_set);
+                    }
                 case 'C':
-                    return LoadEnemyTile(x, y, "MonsterC");
+                    {
+                        var monsterC_set = new AssetIdentifier { AssetId = 0xe0000000 };
+                        return LoadEnemyTile(x, y, monsterC_set);
+                    }
                 case 'D':
-                    return LoadEnemyTile(x, y, "MonsterD");
+                    {
+                        var monsterD_set = new AssetIdentifier { AssetId = 0x10000000 };
+                        return LoadEnemyTile(x, y, monsterD_set);
+                    }
 
                 // Platform block
                 case '~':
                     {
-                        var blockB = new AssetIdentifier { AssetId = 4000U }; // "BlockB"
+                        var blockB = new AssetIdentifier { AssetId = 0x90000010  }; // "BlockB"
                         return LoadVarietyTile(blockB, 2, TileCollision.Platform);
                     }
 
                 // Passable block
                 case ':':
                     {
-                        var blockB = new AssetIdentifier { AssetId = 4000U }; // "BlockB"
+                        var blockB = new AssetIdentifier { AssetId = 0x90000010 }; // "BlockB"
                         return LoadVarietyTile(blockB, 2, TileCollision.Passable);
                     }
 
@@ -232,7 +244,7 @@ namespace Platformer2D
                 // Impassable block
                 case '#':
                     {
-                        var blockA = new AssetIdentifier { AssetId = 8000U }; // "BlockA"
+                        var blockA = new AssetIdentifier { AssetId = 0x90000000 }; // "BlockA"
                         return LoadVarietyTile(blockA, 7, TileCollision.Impassable);
                     }
 
@@ -301,14 +313,14 @@ namespace Platformer2D
 
             exit = GetBounds(x, y).Center;
 
-            var exitCategory = new AssetIdentifier { AssetId = 12000U }; // "Exit"
+            var exitCategory = new AssetIdentifier { AssetId = 0x90000020 }; // "Exit"
             return LoadTile(exitCategory, TileCollision.Passable);
         }
 
         /// <summary>
         /// Instantiates an enemy and puts him in the level.
         /// </summary>
-        private Tile LoadEnemyTile(int x, int y, string spriteSet)
+        private Tile LoadEnemyTile(int x, int y, AssetIdentifier spriteSet)
         {
             Vector2 position = RectangleExtensions.GetBottomCenter(GetBounds(x, y));
             enemies.Add(new Enemy(mTextures, this, position, spriteSet));

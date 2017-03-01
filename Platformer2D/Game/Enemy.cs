@@ -91,7 +91,7 @@ namespace Platformer2D
         /// <summary>
         /// Constructs a new Enemy.
         /// </summary>
-        public Enemy(IMgTextureLoader textures, Level level, Vector2 position, string spriteSet)
+        public Enemy(IMgTextureLoader textures, Level level, Vector2 position, AssetIdentifier spriteSet)
         {
             mTextures = textures;
             this.level = level;
@@ -103,14 +103,14 @@ namespace Platformer2D
         /// <summary>
         /// Loads a particular enemy sprite sheet and sounds.
         /// </summary>
-        public void LoadContent(string spriteSet)
+        public void LoadContent(AssetIdentifier spriteSet)
         {
             // Load animations.
-            spriteSet = "Sprites/" + spriteSet + "/";
+            var runId = spriteSet.Add(1U);
+            runAnimation = new Animation(mTextures.Load(runId), 0.1f, true); // spriteSet + "Run"
 
-            runAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 2000U }), 0.1f, true); // spriteSet + "Run"
-
-            idleAnimation = new Animation(mTextures.Load(new AssetIdentifier { AssetId = 2001U }), 0.15f, true); // spriteSet + "Idle"
+            var idleId = spriteSet;
+            idleAnimation = new Animation(mTextures.Load(idleId), 0.15f, true); // spriteSet + "Idle"
             sprite.PlayAnimation(idleAnimation);
 
             // Calculate bounds within texture size.
