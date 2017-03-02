@@ -45,10 +45,6 @@
       <HintPath>..\Platformer2D\packages\Magnesium.PresentationSurfaces.OpenTK.1.0.2\lib\net45\Magnesium.PresentationSurfaces.OpenTK.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Magnesium.Vulkan, Version=5.0.1.33684, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Platformer2D\packages\Magnesium.Vulkan.5.0.2\lib\portable45-net45+win8+wpa81\Magnesium.Vulkan.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="OpenTK, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\Platformer2D\packages\OpenTK.2.0.0\lib\net20\OpenTK.dll</HintPath>
       <Private>True</Private>
@@ -80,6 +76,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Mg\Magnesium.Vulkan\Magnesium.Vulkan.csproj">
+      <Project>{8ef770d0-2dbc-4a8c-bf5d-dc3d429190f8}</Project>
+      <Name>Magnesium.Vulkan</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\MonoGame.Audio.OpenAL.DesktopGL.NVorbis\MonoGame.Content.Audio.OpenAL.NVorbis.csproj">
       <Project>{4067dabf-4c00-4fe6-a751-453137cd4b2a}</Project>
       <Name>MonoGame.Content.Audio.OpenAL.NVorbis</Name>
@@ -179,13 +179,13 @@
     <Content Include="Content\60000000\60000001.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\80000000\80000000.txt" >
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>      
-    <Content Include="Content\80000000\80000001.txt" >
+    <Content Include="Content\80000000\80000000.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\80000000\80000002.txt" >
+    <Content Include="Content\80000000\80000001.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\80000000\80000002.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\90000000\90000000.png">

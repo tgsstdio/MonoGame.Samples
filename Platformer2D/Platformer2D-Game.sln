@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Content.Audio", ".
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Textures.FreeImageNET", "..\..\..\MonoGame.Textures.FreeImageNET\MonoGame.Textures.FreeImageNET.csproj", "{EEC1E6BC-AF82-413A-BA6A-7E80C032BCFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magnesium.Vulkan", "..\..\..\..\Mg\Magnesium.Vulkan\Magnesium.Vulkan.csproj", "{8EF770D0-2DBC-4A8C-BF5D-DC3D429190F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{EEC1E6BC-AF82-413A-BA6A-7E80C032BCFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEC1E6BC-AF82-413A-BA6A-7E80C032BCFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEC1E6BC-AF82-413A-BA6A-7E80C032BCFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EF770D0-2DBC-4A8C-BF5D-DC3D429190F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EF770D0-2DBC-4A8C-BF5D-DC3D429190F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EF770D0-2DBC-4A8C-BF5D-DC3D429190F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EF770D0-2DBC-4A8C-BF5D-DC3D429190F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

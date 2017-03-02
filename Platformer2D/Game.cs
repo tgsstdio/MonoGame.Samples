@@ -21,6 +21,7 @@ using MonoGame.Graphics;
 using MonoGame.Content;
 using Magnesium;
 using Microsoft.Xna.Framework.Audio;
+using System.Collections.Generic;
 
 namespace Platformer2D
 {
@@ -73,7 +74,7 @@ namespace Platformer2D
         private IMgTextureLoader mTextures;
         private IMgGraphicsConfiguration mGraphicsConfiguration;
         private IPresentationParameters mPresentationParameters;
-        private IMgSwapchainCollection mSwapchain;
+        private DefaultSwapchain mSwapchain;
         private SongDevice mSongs;
         private SoundDevice mEffects;
 
@@ -82,7 +83,7 @@ namespace Platformer2D
             IGraphicsDeviceManager manager,
             IMgGraphicsConfiguration graphicsConfiguration,
             IPresentationParameters presentationParameters,
-            IMgSwapchainCollection swapChain,
+            DefaultSwapchain swapChain,
             IMgPresentationLayer presentationLayer,
             IShaderContentStreamer content,
 
@@ -116,17 +117,24 @@ namespace Platformer2D
             var height = (uint)mPresentationParameters.BackBufferHeight;
 
             mGraphicsConfiguration.Initialize(width, height);
+
+            var dsCreateInfo = new MgGraphicsDeviceCreateInfo
+            {
+                Color = MgFormat.R8G8B8A8_UINT,
+                DepthStencil = MgFormat.D24_UNORM_S8_UINT,
+                Width = width,
+                Height = height,
+                Samples = MgSampleCountFlagBits.COUNT_1_BIT,
+            };
+            
+            // IMPORTANT : REQUIRED 
+            mManager.CreateDevice(dsCreateInfo);
+
             mTextures.Initialize();
+            mSwapchain.Initialize();
 
-           // Content.RootDirectory = "Content";
+            mManager.IsFullScreen = false;
 
-#if WINDOWS_PHONE
-            TargetElapsedTime = TimeSpan.FromTicks(333333);
-#endif
-            mManager.IsFullScreen = true;
-
-            //graphics.PreferredBackBufferWidth = 800;
-            //graphics.PreferredBackBufferHeight = 480;
             mManager.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
 
             Accelerometer.Initialize();
@@ -172,6 +180,16 @@ namespace Platformer2D
             catch { }
 
             LoadNextLevel();
+
+
+            var frameInstances = new List<SubmitInfoGraphNode>();
+            var graphNode = new PrecompiledGraphNode(frameInstances.ToArray());
+            mSwapchain.Graph.Renderables.Add(graphNode);
+
+
+            // SPRITEBATCH
+
+            spriteBatch = new DefaultSpriteBatch();
         }
 
         /// <summary>
@@ -286,11 +304,16 @@ namespace Platformer2D
 
             //spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null,null, globalTransformation);
 
-            //level.Draw(gameTime, spriteBatch);
+            if (mManager.Device == null)
+                return;
+
+            level.Draw(gameTime, spriteBatch);
 
             //DrawHud();
 
             //spriteBatch.End();
+
+            mSwapchain.Render(gameTime);
 
             base.Draw(gameTime);
         }
@@ -367,7 +390,10 @@ namespace Platformer2D
 
         protected override void ReleaseUnmanagedResources()
         {
-            
+            if (mSwapchain != null)
+            {
+                mSwapchain.Dispose();
+            }
         }
     }
 }

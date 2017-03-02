@@ -30,6 +30,7 @@ namespace Platformer2D.DesktopGL
                     container.Register<Microsoft.Xna.Framework.Audio.ISoundEffectImplementation, MonoGame.Audio.OpenAL.DesktopGL.DesktopGLSoundEffectImplementation>(Reuse.InCurrentScope);
 
                     // Magnesium IN SCOPE RESOLUTION
+                    container.Register<DefaultSwapchain>(Reuse.InCurrentScope);
                     container.Register<Magnesium.IMgPresentationLayer, Magnesium.MgPresentationLayer>(Reuse.InCurrentScope);
                     container.Register<Magnesium.IMgPresentationBarrierEntrypoint, Magnesium.MgPresentationBarrierEntrypoint>(Reuse.InCurrentScope);
 
@@ -94,13 +95,16 @@ namespace Platformer2D.DesktopGL
                     {
                         using (var window = new NativeWindow())
                         {
+                            window.Title = "Platformer2D";
+                            window.Visible = true;
+
                             outerScope.RegisterInstance<INativeWindow>(window);
                             using (var driver = outerScope.Resolve<MgDriverContext>())
                             {
                                 var errorCode = driver.Initialize(
                                     new MgApplicationInfo
                                     {
-                                        ApplicationName = "HelloMagnesium",
+                                        ApplicationName = "Platformer2D",
                                         EngineName = "Magnesium",
                                         ApplicationVersion = 1,
                                         EngineVersion = 1,

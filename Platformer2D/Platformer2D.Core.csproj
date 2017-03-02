@@ -30,6 +30,9 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DefaultSpriteBatch.cs" />
+    <Compile Include="DefaultSwapchain.cs" />
+    <Compile Include="EffectDescriptorSet.cs" />
     <Compile Include="Game\IMgSpriteBatch.cs" />
     <Compile Include="MgTexture2DLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
