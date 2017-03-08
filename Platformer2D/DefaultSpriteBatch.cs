@@ -17,13 +17,6 @@ namespace Platformer2D
             void Log(Result result);
         }
 
-        public class EffectVariantSeed
-        {
-            public IMgGraphicsDevice GraphicsDevice { get; set; }
-            public AssetIdentifier VertexShader { get; set; }
-            public AssetIdentifier FragmentShader { get; set; }
-        }
-
         private IMgThreadPartition mPartition;
         private IMgDescriptorSetLayout mDescriptorSetLayout;
         private IMgPipelineLayout mPipelineLayout;
@@ -37,7 +30,7 @@ namespace Platformer2D
             mContent = content;
         }
 
-        public MgEffectVariant[] Load(uint noOfTextureSlots, EffectVariantSeed[] seeds)
+        public EffectVariant[] Load(uint noOfTextureSlots, EffectVariantSeed[] seeds)
         {
             NoOfTextureSlots = noOfTextureSlots;
             SetupDescriptorSetLayout();
@@ -48,50 +41,7 @@ namespace Platformer2D
             return CreateEffectVariants(seeds);
         }
 
-        private void PopulateVariantSeeds(EffectVariantSeed[] seeds)
-        {
-            // use same shaders
-            var vertShaderId = new AssetIdentifier { AssetId = 1 };
-            var fragShaderBaseId = new AssetIdentifier { AssetId = 2 };
-
-            // shader files are laid out based off fragShaderBaseId + NoOfTextureSlots
-            var fragShaderId = fragShaderBaseId.Add(NoOfTextureSlots);
-
-            foreach (var seed in seeds)
-            {
-                seed.VertexShader = vertShaderId;
-                seed.FragmentShader = fragShaderId;
-            }
-        }
-
-        public class EffectDescriptorPool
-        {
-            public IMgDescriptorPool DescriptorPool { get; internal set; }
-            public IMgDescriptorSetLayout DescriptorSetLayout { get; internal set; }
-            public IMgDevice Device { get; internal set; }
-            public uint MaxNoOfDescriptorSets { get; internal set; }
-
-            public EffectDescriptorSet CreateSet()
-            {
-                IMgDescriptorSet[] dSets;
-                var allocateInfo = new MgDescriptorSetAllocateInfo
-                {
-                    DescriptorPool = DescriptorPool,
-                    DescriptorSetCount = 1,
-                    SetLayouts = new  []
-                    {
-                        DescriptorSetLayout,
-                    }
-                };
-                var err = Device.AllocateDescriptorSets(allocateInfo, out dSets);
-                Debug.Assert(err == Result.SUCCESS, err + " != Result.SUCCESS");
-
-                var effectSet = new EffectDescriptorSet(dSets[0]);
-                return effectSet;
-            }
-        }
-
-        public EffectDescriptorPool CreatePool(uint maxNoOfDescriptorSets)
+        public EffectDescriptorPool CreateDescriptorPool(uint maxNoOfDescriptorSets)
         {
             IMgDescriptorPool descriptorPool;
 
@@ -119,21 +69,40 @@ namespace Platformer2D
             {
                 Device  = mPartition.Device,
                 DescriptorPool = descriptorPool,
+                PipelineLayout = mPipelineLayout,
                 MaxNoOfDescriptorSets = maxNoOfDescriptorSets,
                 DescriptorSetLayout = mDescriptorSetLayout,
             };
         }
 
-        private MgEffectVariant[] CreateEffectVariants(EffectVariantSeed[] seeds)
+        #region Private methods
+
+        private void PopulateVariantSeeds(EffectVariantSeed[] seeds)
+        {
+            // use same shaders
+            var vertShaderId = new AssetIdentifier { AssetId = 1 };
+            var fragShaderBaseId = new AssetIdentifier { AssetId = 2 };
+
+            // shader files are laid out based off fragShaderBaseId + NoOfTextureSlots
+            var fragShaderId = fragShaderBaseId.Add(NoOfTextureSlots);
+
+            foreach (var seed in seeds)
+            {
+                seed.VertexShader = vertShaderId;
+                seed.FragmentShader = fragShaderId;
+            }
+        }
+
+        private EffectVariant[] CreateEffectVariants(EffectVariantSeed[] seeds)
         {
             IMgPipeline[] variantPipelines = GenerateVariantPipelines(seeds);
 
             /// output - effect variants    
             var noOfSeeds = seeds.Length;
-            var outputs = new MgEffectVariant[seeds.Length];
+            var outputs = new EffectVariant[seeds.Length];
             for (var i = 0; i < noOfSeeds; i += 1)
             {
-                outputs[i] = new MgEffectVariant
+                outputs[i] = new EffectVariant
                 {
                     GraphicsDevice = seeds[i].GraphicsDevice,
                     Pipeline = variantPipelines[i],
@@ -238,12 +207,6 @@ namespace Platformer2D
             return output;
         }
 
-        public class MgEffectVariant
-        {
-            public IMgGraphicsDevice GraphicsDevice { get; set; }
-            public IMgPipeline Pipeline { get; internal set; }
-        }
-
         private IMgShaderModule SetupShaderModule(System.IO.Stream vs)
         {
             var vertCreateInfo = new MgShaderModuleCreateInfo
@@ -258,8 +221,6 @@ namespace Platformer2D
 
             return vertSM;
         }
-
-
 
         private static MgGraphicsPipelineCreateInfo Generate(EffectVariantSeed seed, IMgPipelineLayout layout, IMgShaderModule vert, IMgShaderModule frag)
         {
@@ -405,7 +366,7 @@ namespace Platformer2D
             };            
         }
 
-        public void Draw(IMgTexture mgTexture2D, Vector2 zero, Color white)
+        public void Begin(EffectVariant variant, EffectPipelineDescriptorSet descriptorSet)
         {
             throw new NotImplementedException();
         }
@@ -415,9 +376,36 @@ namespace Platformer2D
             throw new NotImplementedException();
         }
 
+        public void Draw(IMgTexture texture, Vector2 zero, Color white)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Draw(uint textureSlot, Vector2 zero, Color white)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Draw(uint textureSlot, Vector2 position, object p, Color color, float v1, Vector2 origin, float v2, SpriteEffects none, float v3)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DrawString(SpriteFont font, string value, Vector2 vector2, Color black)
         {
             throw new NotImplementedException();
         }
+
+        public void End()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Draw(IMgTexture texture, Vector2 position, Rectangle? p, Color color, float v1, Vector2 origin, float v2, SpriteEffects flip, float v3)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

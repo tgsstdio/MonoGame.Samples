@@ -102,9 +102,10 @@ namespace Platformer2D
             LoadTiles(fileStream);
 
             // Load background layer textures. For now, all levels must
-            // use the same backgrounds and only use the left-most part of them.
-            layers = new IMgTexture[3];
-            for (var i = 0U; i < layers.Length; ++i)
+            // use the same backgrounds and only use the left-most part of them
+            const uint NO_OF_LAYERS = 3;
+            layers = new IMgTexture[NO_OF_LAYERS];
+            for (var i = 0U; i < NO_OF_LAYERS; ++i)
             {
                 // Choose a random segment if each background layer for level variety.
                 // "Backgrounds/Layer" + i + "_" + segmentIndex

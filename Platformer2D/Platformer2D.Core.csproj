@@ -30,10 +30,15 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BufferCrap.cs" />
     <Compile Include="DefaultSpriteBatch.cs" />
     <Compile Include="DefaultSwapchain.cs" />
+    <Compile Include="EffectDescriptorPool.cs" />
     <Compile Include="EffectDescriptorSet.cs" />
+    <Compile Include="EffectVariantSeed.cs" />
     <Compile Include="Game\IMgSpriteBatch.cs" />
+    <Compile Include="Game\SpriteBatchCommandBuffer.cs" />
+    <Compile Include="EffectVariant.cs" />
     <Compile Include="MgTexture2DLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Game\Accelerometer.cs" />
@@ -71,8 +76,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Magnesium, Version=4.0.6155.29495, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Magnesium.5.0.4\lib\portable45-net45+win8+wpa81\Magnesium.dll</HintPath>
+    <Reference Include="Magnesium, Version=5.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Magnesium.5.1.1\lib\portable45-net45+win8+wpa81\Magnesium.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Magnesium.Ktx, Version=1.0.0.4888, Culture=neutral, processorArchitecture=MSIL">

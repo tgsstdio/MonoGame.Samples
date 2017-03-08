@@ -5,11 +5,12 @@ using System.Collections.Generic;
 namespace Platformer2D
 {
     // HOLDS ALL UPDATES 
-    public class EffectDescriptorSet
+    public class EffectPipelineDescriptorSet
     {
-        public EffectDescriptorSet(IMgDescriptorSet dSet)
+        public EffectPipelineDescriptorSet(IMgDescriptorSet dSet, IMgPipelineLayout pipelineLayout)
         {
             mDescriptorSet = dSet;
+            mPipelineLayout = pipelineLayout;
             mWrites = new List<MgWriteDescriptorSet>();
         }
 
@@ -21,6 +22,15 @@ namespace Platformer2D
             get
             {
                 return mDescriptorSet;
+            }
+        }
+
+        private IMgPipelineLayout mPipelineLayout;
+        public IMgPipelineLayout PipelineLayout
+        {
+            get
+            {
+                return mPipelineLayout;
             }
         }
 
@@ -67,7 +77,7 @@ namespace Platformer2D
                 var writeItem = new MgWriteDescriptorSet
                 {
                     DescriptorCount = (uint)buffers.Length,
-                    DescriptorType = MgDescriptorType.COMBINED_IMAGE_SAMPLER,
+                    DescriptorType = MgDescriptorType.STORAGE_BUFFER,
                     DstArrayElement = first,
                     DstBinding = binding,
                     DstSet = mDescriptorSet,

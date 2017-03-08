@@ -37,12 +37,16 @@
       <HintPath>..\Platformer2D\packages\DryIoc.dll.2.10.1\lib\net45\DryIoc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Magnesium, Version=4.0.6155.29495, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Platformer2D\packages\Magnesium.5.0.4\lib\portable45-net45+win8+wpa81\Magnesium.dll</HintPath>
+    <Reference Include="Magnesium, Version=5.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Platformer2D\packages\Magnesium.5.1.1\lib\portable45-net45+win8+wpa81\Magnesium.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Magnesium.PresentationSurfaces.OpenTK, Version=1.0.2.30735, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Platformer2D\packages\Magnesium.PresentationSurfaces.OpenTK.1.0.2\lib\net45\Magnesium.PresentationSurfaces.OpenTK.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Magnesium.Vulkan, Version=5.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Platformer2D\packages\Magnesium.Vulkan.5.0.3\lib\portable45-net45+win8+wpa81\Magnesium.Vulkan.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="OpenTK, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
@@ -76,10 +80,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Mg\Magnesium.Vulkan\Magnesium.Vulkan.csproj">
-      <Project>{8ef770d0-2dbc-4a8c-bf5d-dc3d429190f8}</Project>
-      <Name>Magnesium.Vulkan</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\MonoGame.Audio.OpenAL.DesktopGL.NVorbis\MonoGame.Content.Audio.OpenAL.NVorbis.csproj">
       <Project>{4067dabf-4c00-4fe6-a751-453137cd4b2a}</Project>
       <Name>MonoGame.Content.Audio.OpenAL.NVorbis</Name>

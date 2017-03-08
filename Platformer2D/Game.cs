@@ -77,6 +77,7 @@ namespace Platformer2D
         private DefaultSwapchain mSwapchain;
         private SongDevice mSongs;
         private SoundDevice mEffects;
+        private IShaderContentStreamer mShaderContent;
 
         public PlatformerGame
         (
@@ -84,8 +85,7 @@ namespace Platformer2D
             IMgGraphicsConfiguration graphicsConfiguration,
             IPresentationParameters presentationParameters,
             DefaultSwapchain swapChain,
-            IMgPresentationLayer presentationLayer,
-            IShaderContentStreamer content,
+            IShaderContentStreamer shaderContent,
 
             IKeyboardInputListener keyboard,
             ITouchListener touch,
@@ -103,6 +103,7 @@ namespace Platformer2D
             mGraphicsConfiguration = graphicsConfiguration;
             mPresentationParameters = presentationParameters;
             mSwapchain = swapChain;
+            mShaderContent = shaderContent;
 
             mKeyboard = keyboard;
             mTouch = touch;
@@ -189,7 +190,51 @@ namespace Platformer2D
 
             // SPRITEBATCH
 
-            spriteBatch = new DefaultSpriteBatch();
+            var batch = new DefaultSpriteBatch(mGraphicsConfiguration.Partition, mShaderContent);
+
+            var createInfo = new MgSpriteBatchBufferCreateInfo
+            {
+                IndexType = MgIndexType.UINT16,
+                IndicesCount = 200,
+                InstancesCount = 200,
+                MaterialsCount = 32,
+                VerticesCount = 200,                
+            };
+
+            var buffer = new MgSpriteBatchBuffer(mGraphicsConfiguration.Partition, createInfo);            
+
+            const uint NO_OFTEXTURE_SLOTS = 3;
+
+            var seeds = new[]
+            {
+                new EffectVariantSeed
+                {
+                    GraphicsDevice = mManager.Device,
+                    FragmentShader = new AssetIdentifier { },
+                    VertexShader = new AssetIdentifier { },
+                }
+            };
+            var variants = batch.Load(NO_OFTEXTURE_SLOTS, seeds);
+
+            const uint NO_OF_DESCRIPTOR_SETS = 3;
+            var pool = batch.CreateDescriptorPool(NO_OF_DESCRIPTOR_SETS);
+
+            var ds = pool.CreateDescriptorSet();
+            ds.SetTextures(0, 0, new MgTexture[] { });
+
+            var bufferInfos = new MgDescriptorBufferInfo[]
+            {
+                new MgDescriptorBufferInfo
+                {
+                    Buffer = buffer.Buffer,
+                    Offset = buffer.Materials.Offset,
+                    Range = buffer.Materials.ArraySize,
+                }
+            };
+
+            ds.SetConstantBuffers(0, 0, bufferInfos);
+
+            spriteBatch = batch;
         }
 
         /// <summary>
