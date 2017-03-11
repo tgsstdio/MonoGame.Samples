@@ -31,7 +31,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BufferCrap.cs" />
-    <Compile Include="DefaultSpriteBatch.cs" />
+    <Compile Include="DefaultSpriteBatchConfiguration.cs" />
+    <Compile Include="DefaultSpriteBatcher.cs" />
     <Compile Include="DefaultSwapchain.cs" />
     <Compile Include="EffectDescriptorPool.cs" />
     <Compile Include="EffectDescriptorSet.cs" />
@@ -39,6 +40,12 @@
     <Compile Include="Game\IMgSpriteBatch.cs" />
     <Compile Include="Game\SpriteBatchCommandBuffer.cs" />
     <Compile Include="EffectVariant.cs" />
+    <Compile Include="IMgIndexedIndirectCommandSerializer.cs" />
+    <Compile Include="MgIndirectBufferSpriteInfo.cs" />
+    <Compile Include="MgClearRenderPassAttachmentInfo.cs" />
+    <Compile Include="MgClearRenderPassInfo.cs" />
+    <Compile Include="MgDrawIndexedIndirectCommand.cs" />
+    <Compile Include="MgSpriteBatchRenderer.cs" />
     <Compile Include="MgTexture2DLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Game\Accelerometer.cs" />
@@ -56,6 +63,8 @@
     <Compile Include="Game.cs" />
     <Compile Include="SongDevice.cs" />
     <Compile Include="SoundDevice.cs" />
+    <Compile Include="MgSpriteRenderPageInfo.cs" />
+    <Compile Include="VkIndexedIndirectCommandSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MonoGame.Content.Audio\MonoGame.Content.Audio.csproj">

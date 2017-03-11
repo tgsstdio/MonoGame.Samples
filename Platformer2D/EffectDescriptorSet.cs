@@ -7,8 +7,10 @@ namespace Platformer2D
     // HOLDS ALL UPDATES 
     public class EffectPipelineDescriptorSet
     {
-        public EffectPipelineDescriptorSet(IMgDescriptorSet dSet, IMgPipelineLayout pipelineLayout)
+        private IMgDevice mDevice;
+        public EffectPipelineDescriptorSet(IMgDevice device, IMgDescriptorSet dSet, IMgPipelineLayout pipelineLayout)
         {
+            mDevice = device;
             mDescriptorSet = dSet;
             mPipelineLayout = pipelineLayout;
             mWrites = new List<MgWriteDescriptorSet>();
@@ -39,7 +41,7 @@ namespace Platformer2D
             mWrites.Clear();
         }
 
-        public void SetTextures(uint binding, uint first, MgTexture[] textures)
+        public void SetTextures(uint binding, uint first, IMgTexture[] textures)
         {
             if (textures != null)
             {
@@ -88,9 +90,9 @@ namespace Platformer2D
             }
         }
 
-        public void End(IMgDevice device)
+        public void End()
         {
-            device.UpdateDescriptorSets(mWrites.ToArray(), null);
+            mDevice.UpdateDescriptorSets(mWrites.ToArray(), null);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Platformer2D
             var err = Device.AllocateDescriptorSets(allocateInfo, out dSets);
             Debug.Assert(err == Result.SUCCESS, err + " != Result.SUCCESS");
 
-            var effectSet = new EffectPipelineDescriptorSet(dSets[0], PipelineLayout);
+            var effectSet = new EffectPipelineDescriptorSet(Device, dSets[0], PipelineLayout);
             return effectSet;
         }
     }

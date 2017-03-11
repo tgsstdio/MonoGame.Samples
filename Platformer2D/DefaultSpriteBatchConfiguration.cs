@@ -1,16 +1,14 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using MonoGame.Core;
 using MonoGame.Graphics;
 using Magnesium;
 using MonoGame.Content;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
 
 namespace Platformer2D
 {
-    internal class DefaultSpriteBatch : IMgSpriteBatch
+    internal class DefaultSpriteBatchConfiguration
     {
         public interface IMgDeviceSuccessLogger
         {
@@ -24,7 +22,7 @@ namespace Platformer2D
 
         public uint NoOfTextureSlots { get; private set; }
 
-        public DefaultSpriteBatch(IMgThreadPartition partition, IShaderContentStreamer content)
+        public DefaultSpriteBatchConfiguration(IMgThreadPartition partition, IShaderContentStreamer content)
         {
             mPartition = partition;
             mContent = content;
@@ -364,46 +362,6 @@ namespace Platformer2D
                     },
                 },                
             };            
-        }
-
-        public void Begin(EffectVariant variant, EffectPipelineDescriptorSet descriptorSet)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Draw(IMgTexture texture, Vector2 position, object p, Color color, float v1, Vector2 origin, float v2, SpriteEffects none, float v3)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Draw(IMgTexture texture, Vector2 zero, Color white)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Draw(uint textureSlot, Vector2 zero, Color white)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Draw(uint textureSlot, Vector2 position, object p, Color color, float v1, Vector2 origin, float v2, SpriteEffects none, float v3)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DrawString(SpriteFont font, string value, Vector2 vector2, Color black)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void End()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Draw(IMgTexture texture, Vector2 position, Rectangle? p, Color color, float v1, Vector2 origin, float v2, SpriteEffects flip, float v3)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

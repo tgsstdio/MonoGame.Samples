@@ -190,7 +190,7 @@ namespace Platformer2D
 
             // SPRITEBATCH
 
-            var batch = new DefaultSpriteBatch(mGraphicsConfiguration.Partition, mShaderContent);
+            var batch = new DefaultSpriteBatchConfiguration(mGraphicsConfiguration.Partition, mShaderContent);
 
             var createInfo = new MgSpriteBatchBufferCreateInfo
             {
@@ -201,40 +201,40 @@ namespace Platformer2D
                 VerticesCount = 200,                
             };
 
-            var buffer = new MgSpriteBatchBuffer(mGraphicsConfiguration.Partition, createInfo);            
+            //var buffer = new MgSpriteBatchBuffer(mGraphicsConfiguration.Partition, createInfo);            
 
-            const uint NO_OFTEXTURE_SLOTS = 3;
+            //const uint NO_OFTEXTURE_SLOTS = 3;
 
-            var seeds = new[]
-            {
-                new EffectVariantSeed
-                {
-                    GraphicsDevice = mManager.Device,
-                    FragmentShader = new AssetIdentifier { },
-                    VertexShader = new AssetIdentifier { },
-                }
-            };
-            var variants = batch.Load(NO_OFTEXTURE_SLOTS, seeds);
+            //var seeds = new[]
+            //{
+            //    new EffectVariantSeed
+            //    {
+            //        GraphicsDevice = mManager.Device,
+            //        FragmentShader = new AssetIdentifier { },
+            //        VertexShader = new AssetIdentifier { },
+            //    }
+            //};
+            //var variants = batch.Load(NO_OFTEXTURE_SLOTS, seeds);
 
-            const uint NO_OF_DESCRIPTOR_SETS = 3;
-            var pool = batch.CreateDescriptorPool(NO_OF_DESCRIPTOR_SETS);
+            //const uint NO_OF_DESCRIPTOR_SETS = 3;
+            //var pool = batch.CreateDescriptorPool(NO_OF_DESCRIPTOR_SETS);
 
-            var ds = pool.CreateDescriptorSet();
-            ds.SetTextures(0, 0, new MgTexture[] { });
+            //var ds = pool.CreateDescriptorSet();
+            //ds.SetTextures(0, 0, new MgTexture[] { });
 
-            var bufferInfos = new MgDescriptorBufferInfo[]
-            {
-                new MgDescriptorBufferInfo
-                {
-                    Buffer = buffer.Buffer,
-                    Offset = buffer.Materials.Offset,
-                    Range = buffer.Materials.ArraySize,
-                }
-            };
+            //var bufferInfos = new MgDescriptorBufferInfo[]
+            //{
+            //    new MgDescriptorBufferInfo
+            //    {
+            //        Buffer = buffer.Buffer,
+            //        Offset = buffer.Materials.Offset,
+            //        Range = buffer.Materials.ArraySize,
+            //    }
+            //};
 
-            ds.SetConstantBuffers(0, 0, bufferInfos);
+            //ds.SetConstantBuffers(0, 0, bufferInfos);
 
-            spriteBatch = batch;
+            //spriteBatch = batch;
         }
 
         /// <summary>

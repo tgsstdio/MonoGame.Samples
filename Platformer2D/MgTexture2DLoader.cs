@@ -1,9 +1,4 @@
 ﻿using MonoGame.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MonoGame.Content;
 using Magnesium;
 using System.Diagnostics;
