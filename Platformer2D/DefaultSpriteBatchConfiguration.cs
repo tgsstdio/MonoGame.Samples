@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace Platformer2D
 {
-    internal class DefaultSpriteBatchConfiguration
+    internal class DefaultSpriteBatchConfiguration : IDisposable
     {
         public interface IMgDeviceSuccessLogger
         {
@@ -34,7 +34,7 @@ namespace Platformer2D
             SetupDescriptorSetLayout();
             SetupPipelineLayout();
 
-            PopulateVariantSeeds(seeds);
+            ///PopulateVariantSeeds(seeds);
 
             return CreateEffectVariants(seeds);
         }
@@ -73,6 +73,50 @@ namespace Platformer2D
             };
         }
 
+        ~DefaultSpriteBatchConfiguration()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(false);
+            GC.SuppressFinalize(this);
+        }
+
+        private bool mIsDisposed = false;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (mIsDisposed)
+                return;
+
+            ReleaseUnmanagedResources();
+            if (disposing)
+            {
+                ReleaseManagedResources();
+            }
+
+            mIsDisposed = true;
+        }
+
+        private void ReleaseManagedResources()
+        {
+        
+        }
+
+        private void ReleaseUnmanagedResources()
+        {
+            if (mPipelineLayout != null)
+            {
+                mPipelineLayout.DestroyPipelineLayout(mPartition.Device, null);
+            }
+
+            if (mDescriptorSetLayout != null)
+            {
+                mDescriptorSetLayout.DestroyDescriptorSetLayout(mPartition.Device, null);
+            }
+        }       
+
         #region Private methods
 
         private void PopulateVariantSeeds(EffectVariantSeed[] seeds)
@@ -102,6 +146,7 @@ namespace Platformer2D
             {
                 outputs[i] = new EffectVariant
                 {
+                    Device = mPartition.Device,
                     GraphicsDevice = seeds[i].GraphicsDevice,
                     Pipeline = variantPipelines[i],
                 };
@@ -259,19 +304,19 @@ namespace Platformer2D
                         }
                     },
                 },
-                DynamicState = new MgPipelineDynamicStateCreateInfo
-                {
-                    DynamicStates = new MgDynamicState[]
-                    {
-                        MgDynamicState.STENCIL_COMPARE_MASK,
-                        MgDynamicState.STENCIL_REFERENCE,
-                        MgDynamicState.STENCIL_WRITE_MASK,
-                        MgDynamicState.LINE_WIDTH,
-                        MgDynamicState.DEPTH_BOUNDS,
-                        MgDynamicState.DEPTH_BIAS,
-                        MgDynamicState.BLEND_CONSTANTS,
-                    }
-                },
+                //DynamicState = new MgPipelineDynamicStateCreateInfo
+                //{
+                //    DynamicStates = new MgDynamicState[]
+                //    {
+                //        MgDynamicState.STENCIL_COMPARE_MASK,
+                //        MgDynamicState.STENCIL_REFERENCE,
+                //        MgDynamicState.STENCIL_WRITE_MASK,
+                //        MgDynamicState.LINE_WIDTH,
+                //        MgDynamicState.DEPTH_BOUNDS,
+                //        MgDynamicState.DEPTH_BIAS,
+                //        MgDynamicState.BLEND_CONSTANTS,
+                //    }
+                //},
                 DepthStencilState = new MgPipelineDepthStencilStateCreateInfo {
                     Front = new MgStencilOpState {
                         WriteMask = ~0U,

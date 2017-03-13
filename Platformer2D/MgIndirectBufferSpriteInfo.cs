@@ -127,7 +127,17 @@ namespace Platformer2D
 
             ReleaseUnmanagedResources();
 
+            if (disposed)
+            {
+                ReleaseManagedResources();
+            }
+
             mIsDisposed = true;
+        }
+
+        private void ReleaseManagedResources()
+        {
+     
         }
 
         private void ReleaseUnmanagedResources()

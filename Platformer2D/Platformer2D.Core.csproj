@@ -30,7 +30,7 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BufferCrap.cs" />
+    <Compile Include="SpriteBatchEffect.cs" />
     <Compile Include="DefaultSpriteBatchConfiguration.cs" />
     <Compile Include="DefaultSpriteBatcher.cs" />
     <Compile Include="DefaultSwapchain.cs" />

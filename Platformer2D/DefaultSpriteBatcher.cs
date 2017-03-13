@@ -14,50 +14,39 @@ namespace Platformer2D
         private readonly MgSpriteBatchRenderer mRenderer;
         private readonly MgIndirectBufferSpriteInfo mIndirectBuffer;
         private List<IMgTexture> mTextures;
-        private IMgIndexedIndirectCommandSerializer mSerializer;
 
-        public DefaultSpriteBatcher(
+        public DefaultSpriteBatcher
+            (
             IMgGraphicsConfiguration graphicsConfiguration,
             MgSpriteBatchBuffer batchBuffer,
             MgSpriteBatchRenderer renderer,
             MgIndirectBufferSpriteInfo indirectBuffer,
-            IMgIndexedIndirectCommandSerializer serializer
+            MgDrawIndexedIndirectCommand command
             )
         {
             mBatchBuffer = batchBuffer;
             mRenderer = renderer;
             mIndirectBuffer = indirectBuffer;
             mTextures = new List<IMgTexture>();
-            mSerializer = serializer;
-
-            mCommand = new MgDrawIndexedIndirectCommand
-            {
-                FirstIndex = 0,
-                FirstInstance = 0,
-                IndexCount = 0,
-                InstanceCount = 0,
-                VertexOffset = 0,
-            };
-
+            mCommand = command;
         }
 
         private MgSpriteRenderPageInfo mRenderPage;
         private EffectPipelineDescriptorSet mDescriptorSet;
 
-        public void Begin(EffectVariant variant, EffectPipelineDescriptorSet descriptorSet)
+        public void Begin(Color clearColor, EffectVariant variant, EffectPipelineDescriptorSet descriptorSet)
         {
             SetupDescriptorSet(descriptorSet);
 
-            SetupRenderer(variant, descriptorSet);
+            SetupRenderer(clearColor, variant, descriptorSet);
         }
 
-        private void SetupRenderer(EffectVariant variant, EffectPipelineDescriptorSet descriptorSet)
+        private void SetupRenderer(Color clearColor, EffectVariant variant, EffectPipelineDescriptorSet descriptorSet)
         {
             var graphicsDevice = variant.GraphicsDevice;
-            var CLEAR_COLOR = Color.AliceBlue;
 
             var passInfo = new MgClearRenderPassInfo(graphicsDevice.RenderpassInfo);
-            var clearValues = ExtractClearValues(CLEAR_COLOR, passInfo);
+            var clearValues = ExtractClearValues(clearColor, passInfo);
 
             mRenderPage = new MgSpriteRenderPageInfo(mBatchBuffer, mIndirectBuffer)
             {
@@ -98,7 +87,7 @@ namespace Platformer2D
             {
                 if (attachment.Usage == MgImageAspectFlagBits.COLOR_BIT)
                 {
-                    var clear = attachment.AsColor(ExtractColor(clearColor));
+                    var clear = attachment.AsColor(AsColor4f(clearColor));
                     clearValues.Add(clear);
                 }
                 else if ((attachment.Usage | MgImageAspectFlagBits.DEPTH_BIT) > 0 || (attachment.Usage | MgImageAspectFlagBits.STENCIL_BIT) > 0)
@@ -111,7 +100,7 @@ namespace Platformer2D
             return clearValues;
         }
 
-        private static MgColor4f ExtractColor(Color value)
+        private static MgColor4f AsColor4f(Color value)
         {
             var color = value.ToVector4();
             return new MgColor4f { R = color.X, G = color.Y, B = color.Z, A = color.W };

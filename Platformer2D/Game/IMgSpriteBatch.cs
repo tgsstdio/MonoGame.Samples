@@ -6,7 +6,7 @@ namespace Platformer2D
 {
     public interface IMgSpriteBatch
     {
-        void Begin(EffectVariant variant, EffectPipelineDescriptorSet descriptorSet);
+        void Begin(Color clearColor, EffectVariant variant, EffectPipelineDescriptorSet descriptorSet);
 
         void Draw(IMgTexture texture, Vector2 position, Rectangle? p, Color color, float v1, Vector2 origin, float v2, SpriteEffects flip, float v3);
         void Draw(IMgTexture texture, Vector2 position, Color white);

@@ -29,6 +29,10 @@ namespace Platformer2D.DesktopGL
                     container.Register<Microsoft.Xna.Framework.Audio.ISoundPlayer, Microsoft.Xna.Framework.Audio.SoundPlayer>(Reuse.InCurrentScope);
                     container.Register<Microsoft.Xna.Framework.Audio.ISoundEffectImplementation, MonoGame.Audio.OpenAL.DesktopGL.DesktopGLSoundEffectImplementation>(Reuse.InCurrentScope);
 
+                    container.Register<SpriteBatchEffect>(Reuse.InCurrentScope);
+                    container.Register<IMgIndexedIndirectCommandSerializer, VkIndexedIndirectCommandSerializer>(Reuse.InCurrentScope);
+
+
                     // Magnesium IN SCOPE RESOLUTION
                     container.Register<DefaultSwapchain>(Reuse.InCurrentScope);
                     container.Register<Magnesium.IMgPresentationLayer, Magnesium.MgPresentationLayer>(Reuse.InCurrentScope);

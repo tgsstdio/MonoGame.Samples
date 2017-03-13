@@ -22,6 +22,7 @@ using MonoGame.Content;
 using Magnesium;
 using Microsoft.Xna.Framework.Audio;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Platformer2D
 {
@@ -78,6 +79,7 @@ namespace Platformer2D
         private SongDevice mSongs;
         private SoundDevice mEffects;
         private IShaderContentStreamer mShaderContent;
+        private SpriteBatchEffect mSpriteEffect;
 
         public PlatformerGame
         (
@@ -96,7 +98,8 @@ namespace Platformer2D
             //IMediaPlayer mediaPlayer,
             //ISongReader songs,
             SongDevice songs,
-            SoundDevice effects
+            SoundDevice effects,
+            SpriteBatchEffect spriteEffect
         )
         {
             mManager = manager;
@@ -112,7 +115,8 @@ namespace Platformer2D
             mGamePlatform = gamePlatform;
             mTextures = textures;
             mSongs = songs;
-            mEffects = effects;     
+            mEffects = effects;
+            mSpriteEffect = spriteEffect;
 
             var width = (uint)mPresentationParameters.BackBufferWidth;
             var height = (uint)mPresentationParameters.BackBufferHeight;
@@ -182,60 +186,48 @@ namespace Platformer2D
 
             LoadNextLevel();
 
+            // SPRITEBATCH
+            spriteBatch = mSpriteEffect.Initialise();
 
             var frameInstances = new List<SubmitInfoGraphNode>();
-            var graphNode = new PrecompiledGraphNode(frameInstances.ToArray());
-            mSwapchain.Graph.Renderables.Add(graphNode);
 
+            var noOfFrameBuffers = mManager.Device.Framebuffers.Length;
+            mCmdBufs = new IMgCommandBuffer[noOfFrameBuffers];
 
-            // SPRITEBATCH
-
-            var batch = new DefaultSpriteBatchConfiguration(mGraphicsConfiguration.Partition, mShaderContent);
-
-            var createInfo = new MgSpriteBatchBufferCreateInfo
+            var allocateInfo = new MgCommandBufferAllocateInfo
             {
-                IndexType = MgIndexType.UINT16,
-                IndicesCount = 200,
-                InstancesCount = 200,
-                MaterialsCount = 32,
-                VerticesCount = 200,                
+                CommandBufferCount = (uint) noOfFrameBuffers,
+                CommandPool = mGraphicsConfiguration.Partition.CommandPool,
+                Level = MgCommandBufferLevel.PRIMARY,
             };
 
-            //var buffer = new MgSpriteBatchBuffer(mGraphicsConfiguration.Partition, createInfo);            
+            var err = mGraphicsConfiguration.Device.AllocateCommandBuffers(allocateInfo, mCmdBufs);
+            Debug.Assert(err == Result.SUCCESS);
 
-            //const uint NO_OFTEXTURE_SLOTS = 3;
+            for (var i = 0; i < noOfFrameBuffers; i += 1)
+            {
+                var frame = mManager.Device.Framebuffers[i];
+                var cmdBuf = mCmdBufs[i];
 
-            //var seeds = new[]
-            //{
-            //    new EffectVariantSeed
-            //    {
-            //        GraphicsDevice = mManager.Device,
-            //        FragmentShader = new AssetIdentifier { },
-            //        VertexShader = new AssetIdentifier { },
-            //    }
-            //};
-            //var variants = batch.Load(NO_OFTEXTURE_SLOTS, seeds);
+                
 
-            //const uint NO_OF_DESCRIPTOR_SETS = 3;
-            //var pool = batch.CreateDescriptorPool(NO_OF_DESCRIPTOR_SETS);
+                var instance = new SubmitInfoGraphNode
+                {
+                    Fence = null,
+                    Submit = new MgSubmitInfo
+                    {
+                        CommandBuffers = new[] { cmdBuf },
+                    }
+                };
 
-            //var ds = pool.CreateDescriptorSet();
-            //ds.SetTextures(0, 0, new MgTexture[] { });
+                frameInstances.Add(instance);
+            }
 
-            //var bufferInfos = new MgDescriptorBufferInfo[]
-            //{
-            //    new MgDescriptorBufferInfo
-            //    {
-            //        Buffer = buffer.Buffer,
-            //        Offset = buffer.Materials.Offset,
-            //        Range = buffer.Materials.ArraySize,
-            //    }
-            //};
-
-            //ds.SetConstantBuffers(0, 0, bufferInfos);
-
-            //spriteBatch = batch;
+            var graphNode = new PrecompiledGraphNode(frameInstances.ToArray());
+            mSwapchain.Graph.Renderables.Add(graphNode);
         }
+
+        private IMgCommandBuffer[] mCmdBufs;
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -435,6 +427,11 @@ namespace Platformer2D
 
         protected override void ReleaseUnmanagedResources()
         {
+            if (mSpriteEffect != null)
+            {
+                mSpriteEffect.Dispose();
+            }
+
             if (mSwapchain != null)
             {
                 mSwapchain.Dispose();

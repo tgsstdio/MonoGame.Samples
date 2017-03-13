@@ -1,11 +1,12 @@
 ﻿using Magnesium;
 using MonoGame.Graphics;
+using System;
 using System.Collections.Generic;
 
 namespace Platformer2D
 {
     // HOLDS ALL UPDATES 
-    public class EffectPipelineDescriptorSet
+    public class EffectPipelineDescriptorSet 
     {
         private IMgDevice mDevice;
         public EffectPipelineDescriptorSet(IMgDevice device, IMgDescriptorSet dSet, IMgPipelineLayout pipelineLayout)

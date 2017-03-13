@@ -52,10 +52,10 @@ namespace Platformer2D
 
         public void Compose(IMgCommandBuffer cmdBuf, IMgFramebuffer frame)
         {
-            if (cmdBuf != null)
+            if (cmdBuf == null)
                 throw new ArgumentNullException(nameof(cmdBuf));
 
-            if (frame != null)
+            if (frame == null)
                 throw new ArgumentNullException(nameof(frame));
 
             Debug.Assert(RenderPass != null);
