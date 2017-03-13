@@ -56,11 +56,6 @@ namespace Platformer2D
                 mPool.Dispose();
             }
 
-            if (mIndirectBuffer != null)
-            {
-                mIndirectBuffer.Dispose();
-            }
-
             if (mVariants != null)
             {
                 foreach (var pipe in mVariants)
@@ -80,7 +75,7 @@ namespace Platformer2D
             }
         }
 
-        public IMgSpriteBatch Initialise()
+        public void Initialise()
         {
             // Configuration here
 
@@ -121,20 +116,59 @@ namespace Platformer2D
             // Sprite batch here
 
             mDescriptorSet = mPool.CreateDescriptorSet();
+        }
 
-            // Sprite batch here
+        #region Create methods
 
-            mIndirectBuffer = new MgIndirectBufferSpriteInfo(mGraphicsConfiguration.Partition, mSerializer, allocator);
+        public IMgSpriteBatch Create(Color clearColor, EffectVariant variant, EffectPipelineDescriptorSet descriptorSet)
+        {
+            SetupBoundDescriptorSet(descriptorSet);
 
-            var command = new MgDrawIndexedIndirectCommand();
+            return InitializeSpriteBatch(clearColor, variant, descriptorSet);
+        }
 
-            mRenderer = new MgSpriteBatchRenderer(mGraphicsConfiguration.Partition, mBatchBuffer, command)
+        private MgSpriteBatchRenderer InitializeSpriteBatch(Color clearColor, EffectVariant variant, EffectPipelineDescriptorSet descriptorSet)
+        {
+            IMgAllocationCallbacks allocator = null;
+            var indirect = new MgIndirectBufferSpriteInfo(mGraphicsConfiguration.Partition, mSerializer, allocator);
+
+            var graphicsDevice = variant.GraphicsDevice;
+
+            var passInfo = new MgClearRenderPassInfo(graphicsDevice.RenderpassInfo);
+            var clearValues = ExtractClearValues(clearColor, passInfo);
+
+            var createInfo = new MgSpriteBatchRendererCreateInfo
             {
-                Viewport = mGraphicsDevice.CurrentViewport,                
+                BatchBuffer = mBatchBuffer,
+                Indirect = indirect,
+                ClearValues = clearValues.ToArray(),
+                PipelineDescriptorSet = descriptorSet,
+                Pipeline = variant.Pipeline,
+                RenderArea = graphicsDevice.Scissor,
+                RenderPass = graphicsDevice.Renderpass,
+                Viewport = graphicsDevice.CurrentViewport,
             };
 
-            var batchJob = new DefaultSpriteBatcher(mGraphicsConfiguration, mBatchBuffer, mRenderer, mIndirectBuffer, command);
-            return batchJob;
+            return new MgSpriteBatchRenderer(mGraphicsConfiguration.Device, createInfo);
+        }
+
+        private void SetupBoundDescriptorSet(EffectPipelineDescriptorSet descriptorSet)
+        {
+            mDescriptorSet = descriptorSet;
+
+            var constantBufferInfo = new MgDescriptorBufferInfo[]
+            {
+                new MgDescriptorBufferInfo
+                {
+                    Buffer = mBatchBuffer.Buffer,
+                    Offset = mBatchBuffer.Materials.Offset,
+                    Range = mBatchBuffer.Materials.ArraySize,
+                }
+            };
+
+            const uint FIRST_CONSTANT_BUFFER_BINDING = 1U;
+            descriptorSet.Begin();
+            descriptorSet.SetConstantBuffers(FIRST_CONSTANT_BUFFER_BINDING, 0, constantBufferInfo);
         }
 
         private static List<MgClearValue> ExtractClearValues(Color clearColor, MgClearRenderPassInfo passInfo)
@@ -144,8 +178,7 @@ namespace Platformer2D
             {
                 if (attachment.Usage == MgImageAspectFlagBits.COLOR_BIT)
                 {
-                    var color = clearColor.ToVector4();
-                    var clear = attachment.AsColor(new MgColor4f { R = color.X, G = color.Y, B = color.Z, A = color.W });
+                    var clear = attachment.AsColor(AsColor4f(clearColor));
                     clearValues.Add(clear);
                 }
                 else if ((attachment.Usage | MgImageAspectFlagBits.DEPTH_BIT) > 0 || (attachment.Usage | MgImageAspectFlagBits.STENCIL_BIT) > 0)
@@ -158,34 +191,42 @@ namespace Platformer2D
             return clearValues;
         }
 
+        private static MgColor4f AsColor4f(Color value)
+        {
+            var color = value.ToVector4();
+            return new MgColor4f { R = color.X, G = color.Y, B = color.Z, A = color.W };
+        }
+
+        private static Vector4 AsVector4(Color value)
+        {
+            var color = value.ToVector4();
+            return new Vector4(color.X, color.Y, color.Z, color.W);
+        }
+
+        #endregion
+
         private EffectPipelineDescriptorSet mDescriptorSet;
         private EffectVariant[] mVariants;
+
+        public EffectVariant[] VariantEffects
+        {
+            get
+            {
+                return mVariants;
+            }
+        }
+
         private MgSpriteBatchBuffer mBatchBuffer;
-        private MgIndirectBufferSpriteInfo mIndirectBuffer;
-        private MgSpriteBatchRenderer mRenderer;
         private EffectDescriptorPool mPool;
+
+        public EffectDescriptorPool DescriptorPool
+        {
+            get
+            {
+                return mPool;
+            }
+        }
+
         private DefaultSpriteBatchConfiguration mConfiguration;
-
-        //public void Update(MgTexture[] textures)
-        //{
-        //    mRenderer.Update();
-        //    UpdateIndirectBuffer();
-
-        //    const uint BINDING = 0U;
-        //    mDescriptorSet.SetTextures(BINDING, 0, textures);
-        //}
-
-        //private void UpdateIndirectBuffer()
-        //{
-        //    const uint FLAGS = 0U;
-
-        //    var device = mGraphicsConfiguration.Device;
-        //    var deviceMemory = mIndirectBuffer.DeviceMemory;
-
-        //    IntPtr dest;
-        //    var err = deviceMemory.MapMemory(device, mIndirectBuffer.BindOffset, mIndirectBuffer.Stride, FLAGS, out dest);
-        //    mSerializer.Serialize(dest, mIndirectBuffer.UpdateOffset, new[] { Command });
-        //    deviceMemory.UnmapMemory(device);
-        //}
     }
 }

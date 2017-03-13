@@ -30,9 +30,9 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="MgSpriteBatchRendererCreateInfo.cs" />
     <Compile Include="SpriteBatchEffect.cs" />
     <Compile Include="DefaultSpriteBatchConfiguration.cs" />
-    <Compile Include="DefaultSpriteBatcher.cs" />
     <Compile Include="DefaultSwapchain.cs" />
     <Compile Include="EffectDescriptorPool.cs" />
     <Compile Include="EffectDescriptorSet.cs" />
@@ -63,7 +63,6 @@
     <Compile Include="Game.cs" />
     <Compile Include="SongDevice.cs" />
     <Compile Include="SoundDevice.cs" />
-    <Compile Include="MgSpriteRenderPageInfo.cs" />
     <Compile Include="VkIndexedIndirectCommandSerializer.cs" />
   </ItemGroup>
   <ItemGroup>

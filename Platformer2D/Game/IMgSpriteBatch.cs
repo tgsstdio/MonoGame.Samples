@@ -1,12 +1,16 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Magnesium;
+using Microsoft.Xna.Framework;
 using MonoGame.Core;
 using MonoGame.Graphics;
+using System;
 
 namespace Platformer2D
 {
-    public interface IMgSpriteBatch
+    public interface IMgSpriteBatch : IDisposable
     {
-        void Begin(Color clearColor, EffectVariant variant, EffectPipelineDescriptorSet descriptorSet);
+        void Compile(IMgCommandBuffer cmd, IMgFramebuffer frame);
+
+        void Begin();
 
         void Draw(IMgTexture texture, Vector2 position, Rectangle? p, Color color, float v1, Vector2 origin, float v2, SpriteEffects flip, float v3);
         void Draw(IMgTexture texture, Vector2 position, Color white);

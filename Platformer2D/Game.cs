@@ -187,7 +187,13 @@ namespace Platformer2D
             LoadNextLevel();
 
             // SPRITEBATCH
-            spriteBatch = mSpriteEffect.Initialise();
+            mSpriteEffect.Initialise();
+
+            var descriptorSet = mSpriteEffect.DescriptorPool.CreateDescriptorSet();
+            Debug.Assert(mSpriteEffect.VariantEffects.Length >= 1);
+            var variant = mSpriteEffect.VariantEffects[0];
+
+            spriteBatch = mSpriteEffect.Create(Color.CornflowerBlue, variant, descriptorSet);
 
             var frameInstances = new List<SubmitInfoGraphNode>();
 
@@ -209,7 +215,11 @@ namespace Platformer2D
                 var frame = mManager.Device.Framebuffers[i];
                 var cmdBuf = mCmdBufs[i];
 
-                
+                var beginInfo = new MgCommandBufferBeginInfo();
+
+                err = cmdBuf.BeginCommandBuffer(beginInfo);
+                spriteBatch.Compile(cmdBuf, frame);
+                err = cmdBuf.EndCommandBuffer();
 
                 var instance = new SubmitInfoGraphNode
                 {
@@ -427,6 +437,11 @@ namespace Platformer2D
 
         protected override void ReleaseUnmanagedResources()
         {
+            if (spriteBatch != null)
+            {
+                spriteBatch.Dispose();
+            }
+
             if (mSpriteEffect != null)
             {
                 mSpriteEffect.Dispose();
